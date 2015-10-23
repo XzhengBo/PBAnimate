@@ -59,12 +59,6 @@
     };
 }
 
--(PBAnimateView *(^)(float vaule))PBAnimatePopScaleSize{
-    return ^(float vaule){
-        self.ani.toValue =[NSValue valueWithCGSize:CGSizeMake(vaule, vaule)];
-        return self;
-    };
-}
 
 #pragma mark 动画类型
 -(PBAnimateView *(^)(float speed))PBAnimateShake{
@@ -227,7 +221,7 @@
 -(PBAnimateView *(^)(bool play))PBAnimate{
     return ^(bool play){
         if (play) {
-            [self.layer pop_addAnimation:self.ani forKey:self.animateType];
+          [self.layer pop_addAnimation:self.ani forKey:self.animateType];
         }
         else{
             [self.layer pop_removeAnimationForKey:self.animateType];

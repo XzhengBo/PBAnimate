@@ -10,14 +10,13 @@
 		E484B41FB32DCDA3CCC31CFD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E39BD06279DF8B81DDE4D351 /* libPods.a */; };
 		F64BA1321BCE43A10028E697 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F64BA1311BCE43A10028E697 /* main.m */; };
 		F64BA1351BCE43A10028E697 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F64BA1341BCE43A10028E697 /* AppDelegate.m */; };
-		F64BA13B1BCE43A10028E697 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F64BA1391BCE43A10028E697 /* Main.storyboard */; };
 		F64BA13D1BCE43A10028E697 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F64BA13C1BCE43A10028E697 /* Assets.xcassets */; };
 		F64BA1401BCE43A10028E697 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F64BA13E1BCE43A10028E697 /* LaunchScreen.storyboard */; };
 		F64BA14B1BCE43A10028E697 /* PBAnimateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F64BA14A1BCE43A10028E697 /* PBAnimateTests.m */; };
 		F64BA1561BCE43A10028E697 /* PBAnimateUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F64BA1551BCE43A10028E697 /* PBAnimateUITests.m */; };
-		F66F43A71BCF3FCE00B1A5DC /* PBAnimateDemoMain.m in Sources */ = {isa = PBXBuildFile; fileRef = F66F43A61BCF3FCE00B1A5DC /* PBAnimateDemoMain.m */; settings = {ASSET_TAGS = (); }; };
-		F66F43B71BCF8A0800B1A5DC /* UIView+PBAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = F66F43B61BCF8A0800B1A5DC /* UIView+PBAnimate.m */; settings = {ASSET_TAGS = (); }; };
-		F6A4311F1BD61FBC00843F31 /* PBAnimateView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A4311E1BD61FBC00843F31 /* PBAnimateView.m */; settings = {ASSET_TAGS = (); }; };
+		F66F43A71BCF3FCE00B1A5DC /* PBAnimateDemoMain.m in Sources */ = {isa = PBXBuildFile; fileRef = F66F43A61BCF3FCE00B1A5DC /* PBAnimateDemoMain.m */; };
+		F66F43B71BCF8A0800B1A5DC /* UIView+PBAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = F66F43B61BCF8A0800B1A5DC /* UIView+PBAnimate.m */; };
+		F6A4311F1BD61FBC00843F31 /* PBAnimateView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A4311E1BD61FBC00843F31 /* PBAnimateView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +44,6 @@
 		F64BA1311BCE43A10028E697 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F64BA1331BCE43A10028E697 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F64BA1341BCE43A10028E697 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F64BA13A1BCE43A10028E697 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F64BA13C1BCE43A10028E697 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F64BA13F1BCE43A10028E697 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F64BA1411BCE43A10028E697 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 				F64BA1631BCE444E0028E697 /* Demo */,
 				F64BA1331BCE43A10028E697 /* AppDelegate.h */,
 				F64BA1341BCE43A10028E697 /* AppDelegate.m */,
-				F64BA1391BCE43A10028E697 /* Main.storyboard */,
 				F64BA13C1BCE43A10028E697 /* Assets.xcassets */,
 				F64BA13E1BCE43A10028E697 /* LaunchScreen.storyboard */,
 				F64BA1411BCE43A10028E697 /* Info.plist */,
@@ -319,7 +316,6 @@
 			files = (
 				F64BA1401BCE43A10028E697 /* LaunchScreen.storyboard in Resources */,
 				F64BA13D1BCE43A10028E697 /* Assets.xcassets in Resources */,
-				F64BA13B1BCE43A10028E697 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,14 +428,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F64BA1391BCE43A10028E697 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F64BA13A1BCE43A10028E697 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F64BA13E1BCE43A10028E697 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
