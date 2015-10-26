@@ -8,8 +8,12 @@
 
 #import "PBAnimateView.h"
 @interface PBAnimateView()
+
 @property(nonatomic)NSString * animateType;
-@property(nonatomic)POPSpringAnimation *ani;
+@property(nonatomic)POPSpringAnimation *SpringAni;
+@property(nonatomic)POPBasicAnimation *BasicAni;
+@property(nonatomic)POPDecayAnimation *DecayAni;
+@property(nonatomic)PBAnimationType animationType;
 
 @end
 
@@ -18,22 +22,23 @@
 #pragma mark 动画属性
 -(PBAnimateView *(^)(float vaule))PBAnimateBounciness{
     return ^(float vaule){
-        if (vaule<20 && vaule>0) {
-            self.ani.springBounciness = vaule;
+        if (vaule<20 && vaule>0 && self.animationType==SpringAnimation) {
+            self.SpringAni.springBounciness = vaule;
         }
         else{
-            self.ani.springBounciness = 4;
+            self.SpringAni.springBounciness = 4;
         }
         return self;
     };
 }
 -(PBAnimateView *(^)(float vaule))PBAnimateTension{
     return ^(float vaule){
-        if (vaule<20 && vaule>0) {
-            self.ani.dynamicsTension = vaule;
+
+        if (vaule<20 && vaule>0 && self.animationType==SpringAnimation) {
+            self.SpringAni.dynamicsTension = vaule;
         }
         else{
-            self.ani.dynamicsTension = 4;
+            self.SpringAni.dynamicsTension = 4;
         }
         return self;
     };
@@ -41,177 +46,248 @@
 
 -(PBAnimateView *(^)(float vaule))PBAnimateFriction{
     return ^(float vaule){
-        self.ani.dynamicsFriction = vaule;
+        if (self.animationType==SpringAnimation) {
+            self.SpringAni.dynamicsFriction = vaule;
+        }
         return self;
     };
 }
 
 -(PBAnimateView *(^)(float vaule))PBAnimateMass{
     return ^(float vaule){
-        self.ani.dynamicsMass = vaule;
+        self.SpringAni.dynamicsMass = vaule;
         return self;
     };
 }
--(PBAnimateView *(^)(id vaule))PBAnimatetoValue{
+-(PBAnimateView *(^)(id vaule))PBAnimateToValue{
     return ^(id vaule){
-        self.ani.toValue =vaule;
+        switch (self.animationType) {
+            case SpringAnimation:
+                self.SpringAni.toValue =vaule;
+                break;
+            case BasicAnimation:
+                self.BasicAni.toValue =vaule;
+                break;
+            default:
+                break;
+        }
+        
         return self;
     };
 }
 
+-(PBAnimateView *(^)(id vaule))PBAnimateFromValue{
+    return ^(id vaule){
+        switch (self.animationType) {
+            case SpringAnimation:
+                self.SpringAni.fromValue =vaule;
+                break;
+            case BasicAnimation:
+                self.BasicAni.fromValue =vaule;
+                break;
+            case DecayAnimation:
+                self.DecayAni.fromValue =vaule;
+                break;
+            default:
+                break;
+        }
+        
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(int vaule))PBAnimateRepeatCount{
+    return ^(int vaule){
+        switch (self.animationType) {
+            case SpringAnimation:
+                self.SpringAni.repeatCount=vaule;
+                break;
+            case BasicAnimation:
+                self.BasicAni.repeatCount =vaule;
+                break;
+            case DecayAnimation:
+                self.DecayAni.repeatCount =vaule;
+                break;
+            default:
+                break;
+        }
+        
+        return self;
+    };
+}
+-(PBAnimateView *(^)(BOOL vaule))PBAnimateAutoreverses{
+    return ^(BOOL vaule){
+        switch (self.animationType) {
+            case SpringAnimation:
+                self.SpringAni.autoreverses=vaule;
+                break;
+            case BasicAnimation:
+                self.BasicAni.autoreverses =vaule;
+                break;
+            case DecayAnimation:
+                self.DecayAni.autoreverses =vaule;
+                break;
+            default:
+                break;
+        }
+        
+        return self;
+    };
+}
 
 #pragma mark 动画类型
--(PBAnimateView *(^)(float speed))PBAnimateShake{
-    return ^(float speed){
-        
-        self.ani = [POPSpringAnimation animation];
-        self.ani.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
-        self.ani.toValue=[NSValue valueWithCGPoint:CGPointMake((self.frame.origin.x-50), 0)];
-        if (speed<20 && speed>0) {
-            self.ani.springSpeed=speed;
+-(PBAnimateView *(^)(id vaule))PBAnimateShake{
+    return ^(id vaule){
+        [self initPBAnimate:SpringAnimation];
+        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+        if (vaule) {
+            self.SpringAni.toValue=vaule;
         }
         else{
-            self.ani.springSpeed=4;
+            self.SpringAni.toValue=[NSValue valueWithCGPoint:CGPointMake((self.frame.origin.x-50), 0)];
         }
-        self.ani.autoreverses=YES;
+        self.SpringAni.autoreverses=YES;
         self.animateType=@"shake";
         return self;
     };
 }
 
--(PBAnimateView *(^)(float speed))PBAnimatePop{
-    return ^(float speed){
-        self.ani = [POPSpringAnimation animation];
-        self.ani.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
-        self.ani.toValue =[NSValue valueWithCGSize:CGSizeMake((self.bounds.size.width)*2, (self.bounds.size.height)*2)];
-        if (speed<20 && speed>0) {
-            self.ani.springSpeed=speed;
+-(PBAnimateView *(^)(id vaule))PBAnimatePop{
+    return ^(id vaule){
+        [self initPBAnimate:SpringAnimation];
+        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
+        if (vaule) {
+            self.SpringAni.toValue =vaule;
         }
         else{
-            self.ani.springSpeed=4;
+          self.SpringAni.toValue =[NSValue valueWithCGSize:CGSizeMake((self.bounds.size.width)*2, (self.bounds.size.height)*2)];
         }
-        self.ani.autoreverses=YES;
-        self.animateType=@"pop";
-        
-        return self;
-    };
-}
-
--(PBAnimateView *(^)(float speed))PBAnimatemorph{
-    return ^(float speed){
-        self.ani = [POPSpringAnimation animation];
-        self.ani.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
-        self.ani.toValue =[NSValue valueWithCGSize:CGSizeMake((self.bounds.size.width)*2, (self.bounds.size.height)*2)];
-        if (speed<20 && speed>0) {
-            self.ani.springSpeed=speed;
-        }
-        else{
-            self.ani.springSpeed=4;
-        }
-        self.ani.autoreverses=YES;
+        self.SpringAni.autoreverses=YES;
         self.animateType=@"pop";
         return self;
     };
 }
 
--(PBAnimateView *(^)(float speed))PBAnimateBounce{
-    return ^(float speed){
-        self.ani = [POPSpringAnimation animation];
-        self.ani.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
-        self.ani.toValue =[NSValue valueWithCGPoint:CGPointMake((self.frame.origin.y-20), 0)];
-        if (speed<20 && speed>0) {
-            self.ani.springSpeed=speed;
+-(PBAnimateView *(^)(id vaule))PBAnimatemorph{
+    return ^(id vaule){
+        [self initPBAnimate:SpringAnimation];
+        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
+        if (vaule) {
+            self.SpringAni.toValue =vaule;
+        }else{
+            self.SpringAni.toValue =[NSValue valueWithCGSize:CGSizeMake((self.bounds.size.width)*2, (self.bounds.size.height)*2)];
+        }
+        self.SpringAni.autoreverses=YES;
+        self.animateType=@"pop";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(id vaule))PBAnimateBounce{
+    return ^(id vaule){
+        [self initPBAnimate:SpringAnimation];
+        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        if (vaule) {
+            self.SpringAni.toValue =vaule;
         }
         else{
-            self.ani.springSpeed=4;
+            self.SpringAni.toValue =[NSValue valueWithCGPoint:CGPointMake((self.frame.origin.y-20), 0)];
         }
-        self.ani.autoreverses=YES;
+        self.SpringAni.autoreverses=YES;
         self.animateType=@"bounce";
         return self;
     };
 }
 
--(PBAnimateView *(^)(float speed))PBAnimateFlash{
-    return ^(float speed){
-        self.ani = [POPSpringAnimation animation];
-        self.ani.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
-        self.ani.toValue =@(0);
-        if (speed<20 && speed>0) {
-            self.ani.springSpeed=speed;
+-(PBAnimateView *(^)(id vaule))PBAnimateFlash{
+    return ^(id vaule){
+        [self initPBAnimate:SpringAnimation];
+        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        if (vaule) {
+            self.SpringAni.toValue =vaule;
         }
         else{
-            self.ani.springSpeed=4;
+            self.SpringAni.toValue =@(0);
         }
-        self.ani.autoreverses=YES;
+        
+        self.SpringAni.autoreverses=YES;
         self.animateType=@"flash";
         return self;
     };
 }
 
--(PBAnimateView *(^)(float speed))PBAnimatePulse{
-    return ^(float speed){
-        self.ani = [POPSpringAnimation animation];
-        self.ani.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
-        self.ani.toValue =[NSValue valueWithCGSize:CGSizeMake((self.frame.size.width+30), (self.frame.size.height+30))];
-        if (speed<20 && speed>0) {
-            self.ani.springSpeed=speed;
+-(PBAnimateView *(^)(id vaule))PBAnimatePulse{
+    return ^(id vaule){
+        [self initPBAnimate:SpringAnimation];
+        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
+        
+        if (vaule) {
+            self.SpringAni.toValue =vaule;
         }
         else{
-            self.ani.springSpeed=4;
+           self.SpringAni.toValue =[NSValue valueWithCGSize:CGSizeMake((self.frame.size.width+30), (self.frame.size.height+30))];
         }
-        self.ani.autoreverses=YES;
-        self.ani.repeatCount=2;
+        
+        self.SpringAni.autoreverses=YES;
+        self.SpringAni.repeatCount=2;
         self.animateType=@"pluse";
         return self;
     };
 }
 
--(PBAnimateView *(^)(float speed))PBAnimateRubber{
-    return ^(float speed){
-        self.ani = [POPSpringAnimation animation];
-        self.ani.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
-        self.ani.toValue =[NSValue valueWithCGSize:CGSizeMake((self.frame.size.width+200), (self.frame.size.height-80))];
-        if (speed<20 && speed>0) {
-            self.ani.springSpeed=speed;
+-(PBAnimateView *(^)(id vaule))PBAnimateRubber{
+    return ^(id vaule){
+        [self initPBAnimate:SpringAnimation];
+        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
+        
+        if (vaule) {
+            self.SpringAni.toValue =vaule;
         }
         else{
-            self.ani.springSpeed=4;
+            self.SpringAni.toValue =[NSValue valueWithCGSize:CGSizeMake((self.frame.size.width+200), (self.frame.size.height-80))];
+
         }
-        self.ani.autoreverses=YES;
+        
+        self.SpringAni.autoreverses=YES;
         self.animateType=@"pluse";
         return self;
     };
 }
 
--(PBAnimateView *(^)(float speed))PBAnimateSwing{
-    return ^(float speed){
-        self.ani = [POPSpringAnimation animation];
-        self.ani.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
-        self.ani.toValue =@(M_PI/2);
-        if (speed<20 && speed>0) {
-            self.ani.springSpeed=speed;
+-(PBAnimateView *(^)(id vaule))PBAnimateSwing{
+    return ^(id vaule){
+        [self initPBAnimate:SpringAnimation];
+        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        
+        
+        if (vaule) {
+            self.SpringAni.toValue =vaule;
         }
         else{
-            self.ani.springSpeed=4;
+            self.SpringAni.toValue =@(M_PI/2);
+            
         }
-        self.ani.autoreverses=YES;
+        self.SpringAni.autoreverses=YES;
         self.animateType=@"swing";
         return self;
     };
 }
 
--(PBAnimateView *(^)(float speed))PBAnimateTada{
-    return ^(float speed){
-        self.ani = [POPSpringAnimation animation];
-        self.ani.property=[POPAnimatableProperty propertyWithName:kPOPLayerBackgroundColor];
-        self.ani.toValue =[UIColor redColor];
-        if (speed<20 && speed>0) {
-            self.ani.springSpeed=speed;
+-(PBAnimateView *(^)(id vaule))PBAnimateTada{
+    return ^(id vaule){
+        [self initPBAnimate:SpringAnimation];
+        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerBackgroundColor];
+        
+        
+        if (vaule) {
+            self.SpringAni.toValue =vaule;
         }
         else{
-            self.ani.springSpeed=4;
+           self.SpringAni.toValue =[UIColor redColor];
+            
         }
-        self.ani.autoreverses=YES;
+        
+        self.SpringAni.autoreverses=YES;
         self.animateType=@"tada";
         return self;
     };
@@ -221,7 +297,7 @@
 -(PBAnimateView *(^)(bool play))PBAnimate{
     return ^(bool play){
         if (play) {
-          [self.layer pop_addAnimation:self.ani forKey:self.animateType];
+          [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
         }
         else{
             [self.layer pop_removeAnimationForKey:self.animateType];
@@ -232,12 +308,30 @@
 
 -(void)PBAnimateEndCallback:(PBAnimateCompletion)compblock{
     
-    self.ani.completionBlock = ^(POPAnimation *anim, BOOL finished) {
+    self.SpringAni.completionBlock = ^(POPAnimation *anim, BOOL finished) {
         if (finished) {
             compblock();
         }
     };
     
+}
+
+#pragma mark 拓展方法
+-(void)initPBAnimate:(PBAnimationType)animationType{
+    self.animationType=animationType;
+    switch (animationType) {
+        case BasicAnimation:
+            self.BasicAni=[POPBasicAnimation animation];
+            break;
+        case DecayAnimation:
+            self.DecayAni=[POPDecayAnimation animation];
+            break;
+        case SpringAnimation:
+            self.SpringAni=[POPSpringAnimation animation];
+            break;
+        default:
+            break;
+    }
 }
 
 @end

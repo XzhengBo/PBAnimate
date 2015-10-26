@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^PBAnimateCompletion)();
+
+typedef NS_ENUM(NSInteger,PBAnimationType) {
+    BasicAnimation,
+    DecayAnimation,
+    SpringAnimation
+};
+
 @interface PBAnimateView : UIView
 #pragma mark 动画属性设置
 /**
@@ -34,31 +41,48 @@ typedef void(^PBAnimateCompletion)();
 /**
  *  设置ToValue值
  */
-@property(nonatomic,readonly) PBAnimateView *(^PBAnimatetoValue)(id vaule);
-
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateToValue)(id vaule);
+/**
+ *  设置FromValue值
+ */
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateFromValue)(id vaule);
+/**
+ *  设置动画重复几次
+ */
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateRepeatCount)(int vaule);
+/**
+ *  设置是否自动恢复
+ */
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateAutoreverses)(BOOL vaule);
 #pragma mark 动画类型
-
-@property(nonatomic,readonly) PBAnimateView *(^PBAnimateShake)(float speed);
-
-@property(nonatomic,readonly) PBAnimateView *(^PBAnimatePop)(float speed);
 /**
- *  设置Bounce动画，参数速度，范围：0~20
+ *  Shake动画，参数：X轴位置，默认：原位置-50
  */
-@property(nonatomic,readonly) PBAnimateView *(^PBAnimateBounce)(float speed);
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateShake)(id vaule);
 /**
- *  设置flash动画，参数速度，范围：0~20
+ *  POP动画，参数：放大bounds，默认：放大2倍
  */
-@property(nonatomic,readonly) PBAnimateView *(^PBAnimateFlash)(float speed);
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimatePop)(id vaule);
 /**
- *  设置pluse动画，参数速度，范围：0~20
+ *  Bounce动画，参数：Y轴移动位置，默认：原位置-20
  */
-@property(nonatomic,readonly) PBAnimateView *(^PBAnimatePulse)(float speed);
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateBounce)(id vaule);
+/**
+ *  flash动画，参数：透明度，默认：0
+ */
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateFlash)(id vaule);
+/**
+ *  pluse动画，参数：放大bounds，默认：bounds+30
+ */
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimatePulse)(id vaule);
 /**
  *  设置Rubber动画，参数速度，范围：0~20
  */
-@property(nonatomic,readonly) PBAnimateView *(^PBAnimateRubber)(float speed);
-@property(nonatomic,readonly) PBAnimateView *(^PBAnimateSwing)(float speed);
-@property(nonatomic,readonly) PBAnimateView *(^PBAnimateTada)(float speed);
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateRubber)(id vaule);
+
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateSwing)(id vaule);
+
+@property(nonatomic,readonly) PBAnimateView *(^PBAnimateTada)(id vaule);
 
 #pragma mark 动画事件
 /**

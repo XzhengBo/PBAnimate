@@ -37,7 +37,7 @@
     self.DemoTableView.backgroundColor=[UIColor colorWithRed:249.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1];
     self.DemoTableView.delegate=self;
     self.DemoTableView.dataSource=self;
-
+    
     self.DemoView=[[PBAnimateView alloc]init];
     self.DemoView.backgroundColor=[UIColor colorWithRed:117.0/255.0 green:101.0/255.0 blue:239.0/255.0 alpha:1];
     self.DemoView.layer.cornerRadius=10;
@@ -93,33 +93,34 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *selectValue=[self.DemoDataList objectAtIndex:indexPath.row];
     if ([selectValue isEqualToString:@"shake"]) {
-        self.DemoView.PBAnimateShake(5).PBAnimate(YES);
+        self.DemoView.PBAnimateShake(nil).PBAnimate(YES);
         [self.DemoView PBAnimateEndCallback:^() {
                 NSLog(@"动完了");
         }];
         
     }
     if ([selectValue isEqualToString:@"pop"]) {
-        self.DemoView.PBAnimatePop(120).PBAnimate(YES);
+        self.DemoView.PBAnimatePop(nil).PBAnimate(YES);
     }
     if ([selectValue isEqualToString:@"bounce"]) {
         id toValue =[NSValue valueWithCGPoint:CGPointMake((0), 0)];
-        self.DemoView.PBAnimateBounce(10).PBAnimatetoValue(toValue).PBAnimateBounciness(4).PBAnimate(YES);
+        self.DemoView.PBAnimateBounce(toValue).PBAnimateBounciness(4).PBAnimate(YES);
     }
     if ([selectValue isEqualToString:@"flash"]) {
-        self.DemoView.PBAnimateFlash(5).PBAnimate(YES);
+        self.DemoView.PBAnimateFlash(nil).PBAnimate(YES);
     }
     if ([selectValue isEqualToString:@"pulse"]) {
-        self.DemoView.PBAnimatePulse(5).PBAnimate(YES);
+        id toValue =[NSValue valueWithCGSize:CGSizeMake(200, 200)];
+        self.DemoView.PBAnimatePulse(toValue).PBAnimate(YES);
     }
     if ([selectValue isEqualToString:@"rubberBand"]) {
-        self.DemoView.PBAnimateRubber(5).PBAnimate(YES);
+        self.DemoView.PBAnimateRubber(nil).PBAnimate(YES);
         [self.DemoView PBAnimateEndCallback:^() {
             NSLog(@"动完了");
         }];
     }
     if ([selectValue isEqualToString:@"swing"]) {
-        self.DemoView.PBAnimateSwing(5).PBAnimate(YES);
+        self.DemoView.PBAnimateSwing(nil).PBAnimate(YES);
         [self.DemoView PBAnimateEndCallback:^() {
             NSLog(@"swing finish");
         }];
@@ -127,12 +128,15 @@
     }
     
     if ([selectValue isEqualToString:@"tada"]) {
-        self.DemoView.PBAnimateTada(5).PBAnimate(YES);
+        id fromVal=[UIColor blueColor];
+        id toVal=[UIColor grayColor];
+        self.DemoView.PBAnimateTada(toVal).PBAnimateFromValue(fromVal).PBAnimate(YES);
     }
     
     NSLog(@"%@",[self.DemoDataList objectAtIndex:indexPath.row]);
 
 }
+
 #pragma mark -- 初始化数据
 -(void)initData{
     self.DemoDataList=[[NSArray alloc]initWithObjects:@"bounce",@"flash",@"pulse",@"rubberBand",@"shake",@"swing",@"tada",@"wobble",@"jello",nil];
