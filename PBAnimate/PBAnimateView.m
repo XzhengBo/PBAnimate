@@ -293,11 +293,51 @@
     };
 }
 
+-(PBAnimateView *(^)(id vaule))PBAnimateCountDown{
+    return ^(id vaule){
+        POPAnimatableProperty *countdown = [POPAnimatableProperty propertyWithName:@"countdown" initializer:^(POPMutableAnimatableProperty *countdown) {
+            countdown.writeBlock = ^(id obj, const CGFloat values[]) {
+                UILabel *lable = (UILabel*)obj;
+                lable.text = [NSString stringWithFormat:@"%02d:%02d:%02d",(int)values[0]/60,(int)values[0]%60,(int)(values[0]*100)%100];
+            };
+            
+            //        prop.threshold = 0.01f;
+        }];
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+        self.BasicAni.property=countdown;
+        self.BasicAni.fromValue=@(0);
+        if (vaule) {
+            self.BasicAni.toValue=vaule;
+        }
+        else{
+            self.BasicAni.toValue=@(3*60);;
+        }
+        self.BasicAni.duration=3*60;
+        self.BasicAni.beginTime=CACurrentMediaTime()+1.0f;
+        self.animateType=@"countDown";
+        return self;
+    };
+}
+
 #pragma mark 动画事件
 -(PBAnimateView *(^)(bool play))PBAnimate{
     return ^(bool play){
         if (play) {
-          [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
+            switch (self.animationType) {
+                case SpringAnimation:
+                    [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
+                    break;
+                case BasicAnimation:
+                    [self.layer pop_addAnimation:self.BasicAni forKey:self.animateType];
+                    break;
+                case DecayAnimation:
+                    [self.layer pop_addAnimation:self.DecayAni forKey:self.animateType];
+                    break;
+                default:
+                    break;
+            }
+          
         }
         else{
             [self.layer pop_removeAnimationForKey:self.animateType];
@@ -307,12 +347,46 @@
 }
 
 -(void)PBAnimateEndCallback:(PBAnimateCompletion)compblock{
+    if (self.animationType==SpringAnimation) {
+        self.SpringAni.completionBlock = ^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                compblock();
+            }
+        };
+    }
+    if (self.animationType==BasicAnimation) {
+        self.BasicAni.completionBlock = ^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                compblock();
+            }
+        };
+    }
+    if (self.animationType==DecayAnimation) {
+        self.DecayAni.completionBlock = ^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                compblock();
+            }
+        };
+    }
     
-    self.SpringAni.completionBlock = ^(POPAnimation *anim, BOOL finished) {
-        if (finished) {
+}
+
+-(void)PBAnimateStartCallback:(PBAnimateCompletion)compblock{
+    if (self.animationType==SpringAnimation) {
+        self.SpringAni.animationDidStartBlock = ^(POPAnimation *anim) {
             compblock();
-        }
-    };
+        };
+    }
+    if (self.animationType==BasicAnimation) {
+        self.BasicAni.animationDidStartBlock = ^(POPAnimation *anim) {
+            compblock();
+        };
+    }
+    if (self.animationType==DecayAnimation) {
+        self.DecayAni.animationDidStartBlock = ^(POPAnimation *anim) {
+            compblock();
+        };
+    }
     
 }
 
@@ -322,16 +396,57 @@
     switch (animationType) {
         case BasicAnimation:
             self.BasicAni=[POPBasicAnimation animation];
+//            self.BasicAni.delegate=self;
             break;
         case DecayAnimation:
             self.DecayAni=[POPDecayAnimation animation];
             break;
         case SpringAnimation:
             self.SpringAni=[POPSpringAnimation animation];
+//            self.SpringAni.delegate=self;
             break;
         default:
             break;
     }
 }
 
+
+
+//#pragma mark Delegate
+///**
+// @abstract Called on animation start.
+// @param anim The relevant animation.
+// */
+//- (void)pop_animationDidStart:(POPAnimation *)anim{
+//     NSLog(@"pop_animationDidStart deldegate");
+//}
+//
+///**
+// @abstract Called when value meets or exceeds to value.
+// @param anim The relevant animation.
+// */
+//- (void)pop_animationDidReachToValue:(POPAnimation *)anim{
+//     NSLog(@"pop_animationDidReachToValue deldegate");
+//}
+//
+///**
+// @abstract Called on animation stop.
+// @param anim The relevant animation.
+// @param finished Flag indicating finished state. Flag is true if the animation reached completion before being removed.
+// */
+//- (void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished{
+//     NSLog(@"pop_animationDidStop deldegate");
+//}
+//
+///**
+// @abstract Called each frame animation is applied.
+// @param anim The relevant animation.
+// */
+//- (void)pop_animationDidApply:(POPAnimation *)anim{
+//     NSLog(@"pop_animationDidApply deldegate");
+//}
+
+
 @end
+
+

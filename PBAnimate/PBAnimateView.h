@@ -17,6 +17,9 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 };
 
 @interface PBAnimateView : UIView
+
+
+
 #pragma mark 动画属性设置
 /**
  *  设置反弹幅度
@@ -54,6 +57,9 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
  *  设置是否自动恢复
  */
 @property(nonatomic,readonly) PBAnimateView *(^PBAnimateAutoreverses)(BOOL vaule);
+
+
+
 #pragma mark 动画类型
 /**
  *  Shake动画，参数：X轴位置，默认：原位置-50
@@ -84,6 +90,8 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 
 @property(nonatomic,readonly) PBAnimateView *(^PBAnimateTada)(id vaule);
 
+
+
 #pragma mark 动画事件
 /**
  *  是否开始动画，参数YES/NO
@@ -91,11 +99,24 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^PBAnimate)(bool play);
 
 /**
- *  动画结束回调
+ *  动画结束
  *
  *  @param compblock 回调方法
  */
 -(void) PBAnimateEndCallback:(PBAnimateCompletion) compblock;
+/**
+ *  动画开始
+ *
+ *  @param compblock 回调方法
+ */
+-(void) PBAnimateStartCallback:(PBAnimateCompletion) compblock;
+
+@end
 
 
+
+//to do
+@protocol PBAnimationDelegate <NSObject>
+@optional
+- (void)pop_animationDidApply:(POPAnimation *)anim;
 @end

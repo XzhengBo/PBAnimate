@@ -105,6 +105,15 @@
     if ([selectValue isEqualToString:@"bounce"]) {
         id toValue =[NSValue valueWithCGPoint:CGPointMake((0), 0)];
         self.DemoView.PBAnimateBounce(toValue).PBAnimateBounciness(4).PBAnimate(YES);
+
+        [self.DemoView PBAnimateStartCallback:^{
+            NSLog(@"bounce 动画开始");
+        }];
+        
+        [self.DemoView PBAnimateEndCallback:^() {
+            NSLog(@"bounce 动画结束");
+        }];
+        
     }
     if ([selectValue isEqualToString:@"flash"]) {
         self.DemoView.PBAnimateFlash(nil).PBAnimate(YES);
@@ -115,16 +124,14 @@
     }
     if ([selectValue isEqualToString:@"rubberBand"]) {
         self.DemoView.PBAnimateRubber(nil).PBAnimate(YES);
-        [self.DemoView PBAnimateEndCallback:^() {
-            NSLog(@"动完了");
-        }];
+        
     }
     if ([selectValue isEqualToString:@"swing"]) {
         self.DemoView.PBAnimateSwing(nil).PBAnimate(YES);
         [self.DemoView PBAnimateEndCallback:^() {
             NSLog(@"swing finish");
         }];
-        
+       
     }
     
     if ([selectValue isEqualToString:@"tada"]) {
