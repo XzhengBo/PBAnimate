@@ -22,8 +22,7 @@ typedef NS_OPTIONS(NSUInteger, POPAnimationClampFlags)
   kPOPAnimationClampBoth = kPOPAnimationClampStart | kPOPAnimationClampEnd,
 };
 
-/**
- @abstract The semi-concrete property animation subclass.
+/** @abstract The semi-concrete property animation subclass.
  */
 @interface POPPropertyAnimation : POPAnimation
 

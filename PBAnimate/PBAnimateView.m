@@ -20,7 +20,7 @@
 @implementation PBAnimateView
 
 #pragma mark 动画属性
--(PBAnimateView *(^)(float vaule))PBAnimateBounciness{
+-(PBAnimateView *(^)(float vaule))Bounciness{
     return ^(float vaule){
         if (vaule<20 && vaule>0 && self.animationType==SpringAnimation) {
             self.SpringAni.springBounciness = vaule;
@@ -31,7 +31,7 @@
         return self;
     };
 }
--(PBAnimateView *(^)(float vaule))PBAnimateTension{
+-(PBAnimateView *(^)(float vaule))Tension{
     return ^(float vaule){
 
         if (vaule<20 && vaule>0 && self.animationType==SpringAnimation) {
@@ -44,7 +44,7 @@
     };
 }
 
--(PBAnimateView *(^)(float vaule))PBAnimateFriction{
+-(PBAnimateView *(^)(float vaule))Friction{
     return ^(float vaule){
         if (self.animationType==SpringAnimation) {
             self.SpringAni.dynamicsFriction = vaule;
@@ -53,13 +53,13 @@
     };
 }
 
--(PBAnimateView *(^)(float vaule))PBAnimateMass{
+-(PBAnimateView *(^)(float vaule))Mass{
     return ^(float vaule){
         self.SpringAni.dynamicsMass = vaule;
         return self;
     };
 }
--(PBAnimateView *(^)(id vaule))PBAnimateToValue{
+-(PBAnimateView *(^)(id vaule))To{
     return ^(id vaule){
         switch (self.animationType) {
             case SpringAnimation:
@@ -76,7 +76,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimateFromValue{
+-(PBAnimateView *(^)(id vaule))From{
     return ^(id vaule){
         switch (self.animationType) {
             case SpringAnimation:
@@ -96,7 +96,7 @@
     };
 }
 
--(PBAnimateView *(^)(int vaule))PBAnimateRepeatCount{
+-(PBAnimateView *(^)(int vaule))RepeatCount{
     return ^(int vaule){
         switch (self.animationType) {
             case SpringAnimation:
@@ -115,7 +115,7 @@
         return self;
     };
 }
--(PBAnimateView *(^)(BOOL vaule))PBAnimateAutoreverses{
+-(PBAnimateView *(^)(BOOL vaule))Autoreverses{
     return ^(BOOL vaule){
         switch (self.animationType) {
             case SpringAnimation:
@@ -136,7 +136,7 @@
 }
 
 #pragma mark 动画类型
--(PBAnimateView *(^)(id vaule))PBAnimateShake{
+-(PBAnimateView *(^)(id vaule))Shake{
     return ^(id vaule){
         [self initPBAnimate:SpringAnimation];
         self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
@@ -152,7 +152,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimatePop{
+-(PBAnimateView *(^)(id vaule))Pop{
     return ^(id vaule){
         [self initPBAnimate:SpringAnimation];
         self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
@@ -168,7 +168,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimatemorph{
+-(PBAnimateView *(^)(id vaule))Morph{
     return ^(id vaule){
         [self initPBAnimate:SpringAnimation];
         self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
@@ -183,7 +183,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimateBounce{
+-(PBAnimateView *(^)(id vaule))Bounce{
     return ^(id vaule){
         [self initPBAnimate:SpringAnimation];
         self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
@@ -199,7 +199,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimateFlash{
+-(PBAnimateView *(^)(id vaule))Flash{
     return ^(id vaule){
         [self initPBAnimate:SpringAnimation];
         self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
@@ -216,7 +216,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimatePulse{
+-(PBAnimateView *(^)(id vaule))Pulse{
     return ^(id vaule){
         [self initPBAnimate:SpringAnimation];
         self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
@@ -235,7 +235,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimateRubber{
+-(PBAnimateView *(^)(id vaule))Rubber{
     return ^(id vaule){
         [self initPBAnimate:SpringAnimation];
         self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerSize];
@@ -254,7 +254,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimateSwing{
+-(PBAnimateView *(^)(id vaule))Swing{
     return ^(id vaule){
         [self initPBAnimate:SpringAnimation];
         self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
@@ -273,7 +273,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimateTada{
+-(PBAnimateView *(^)(id vaule))Tada{
     return ^(id vaule){
         [self initPBAnimate:SpringAnimation];
         self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerBackgroundColor];
@@ -293,7 +293,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))PBAnimateCountDown{
+-(PBAnimateView *(^)(id vaule))CountDown{
     return ^(id vaule){
         POPAnimatableProperty *countdown = [POPAnimatableProperty propertyWithName:@"countdown" initializer:^(POPMutableAnimatableProperty *countdown) {
             countdown.writeBlock = ^(id obj, const CGFloat values[]) {
@@ -316,32 +316,72 @@
         self.BasicAni.duration=3*60;
         self.BasicAni.beginTime=CACurrentMediaTime()+1.0f;
         self.animateType=@"countDown";
+        
         return self;
     };
 }
 
-#pragma mark 动画事件
--(PBAnimateView *(^)(bool play))PBAnimate{
-    return ^(bool play){
-        if (play) {
-            switch (self.animationType) {
-                case SpringAnimation:
-                    [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
-                    break;
-                case BasicAnimation:
-                    [self.layer pop_addAnimation:self.BasicAni forKey:self.animateType];
-                    break;
-                case DecayAnimation:
-                    [self.layer pop_addAnimation:self.DecayAni forKey:self.animateType];
-                    break;
-                default:
-                    break;
-            }
-          
+#pragma mark 封装基础动画
+-(PBAnimateView *(^)(id vaule))fadeIn{
+    return ^(id vaule){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.BasicAni.autoreverses=YES;
+        if (vaule) {
+            self.BasicAni.toValue =vaule;
         }
         else{
-            [self.layer pop_removeAnimationForKey:self.animateType];
+            self.BasicAni.toValue =@0;
         }
+        self.animateType=@"fadeIn";
+        return self;
+    };
+}
+-(PBAnimateView *(^)(id vaule))fadeInDown{
+    return ^(id vaule){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.BasicAni.autoreverses=YES;
+        if (vaule) {
+            self.BasicAni.toValue =vaule;
+        }
+        else{
+            self.BasicAni.toValue =@0;
+        }
+        self.animateType=@"fadeIn";
+        [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
+        
+        return self;
+    };
+}
+#pragma mark 动画事件
+
+-(PBAnimateView *(^)(void))Play{
+    
+    return ^(void){
+        
+        switch (self.animationType) {
+            case SpringAnimation:
+                [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
+                break;
+            case BasicAnimation:
+                [self.layer pop_addAnimation:self.BasicAni forKey:self.animateType];
+                break;
+            case DecayAnimation:
+                [self.layer pop_addAnimation:self.DecayAni forKey:self.animateType];
+                break;
+            default:
+                break;
+        }
+        
+        return self;
+    };
+    
+}
+
+-(PBAnimateView *(^)(void))Stop{
+    return ^(void){
+        [self.layer pop_removeAnimationForKey:self.animateType];
         return self;
     };
 }
