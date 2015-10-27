@@ -154,7 +154,7 @@
         self.DemoView.fadeInDown(toVal).Play();
     }
     if ([selectValue isEqualToString:@"slideInDown"]) {
-        self.DemoView.slideInDown(nil).Play();
+        self.DemoView.slideInDown(nil);
     }
     NSLog(@"%@",[self.DemoDataList objectAtIndex:indexPath.row]);
 

@@ -334,11 +334,21 @@
         }
         else{
             NSLog(@"%f",self.initSize.origin.y);
-            self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+50];
-//            NSLog(@"%d",self.);
+            self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
         }
-        self.animateType=@"slideInDown";
-//        self.BasicAni.autoreverses=YES;
+        self.BasicAni.duration=5;
+        [self.layer pop_addAnimation:self.BasicAni forKey:@"slideInDown"];
+        
+       
+        self.BasicAni=[POPBasicAnimation animation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.BasicAni.fromValue=@0;
+        self.BasicAni.duration=5;
+        self.BasicAni.toValue=@1;
+        self.BasicAni.name=@"fade";
+        //self.SpringAni.autoreverses=YES;
+        [self.layer pop_addAnimation:self.BasicAni forKey:@"fade"];
+       
          return self;
     };
 }

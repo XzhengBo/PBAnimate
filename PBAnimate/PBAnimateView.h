@@ -120,6 +120,7 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^RoateIn)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^RoateInDownLeft)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^RoateInDownRight)(id vaule);
+
 @property(nonatomic,readonly) PBAnimateView *(^RoateInUpRight)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^RoateInUpLeft)(id vaule);
 #pragma mark RoateOut
