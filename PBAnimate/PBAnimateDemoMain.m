@@ -99,52 +99,52 @@
         }];
         
     }
-    if ([selectValue isEqualToString:@"pop"]) {
-        self.DemoView.Pop(nil).Play();
-    }
-    if ([selectValue isEqualToString:@"bounce"]) {
-        id toValue =[NSValue valueWithCGPoint:CGPointMake((0), 0)];
-        self.DemoView.Bounce(toValue).Bounciness(4).Autoreverses(NO).Play();
-
-        [self.DemoView PBAnimateStartCallback:^{
-            NSLog(@"bounce 动画开始");
-        }];
-        
-        [self.DemoView PBAnimateEndCallback:^() {
-            NSLog(@"bounce 动画结束");
-        }];
-        
-    }
-    if ([selectValue isEqualToString:@"flash"]) {
-        self.DemoView.Flash(nil).Play();
-    }
-    if ([selectValue isEqualToString:@"pulse"]) {
-        id toValue =[NSValue valueWithCGSize:CGSizeMake(200, 200)];
-        self.DemoView.Pulse(toValue).Play();
-    }
-    if ([selectValue isEqualToString:@"rubberBand"]) {
-        self.DemoView.Rubber(nil).Play();
-        
-    }
-    if ([selectValue isEqualToString:@"swing"]) {
-        self.DemoView.Swing(nil).Play();
-        [self.DemoView PBAnimateEndCallback:^() {
-            NSLog(@"swing finish");
-        }];
-       
-    }
-    
-    if ([selectValue isEqualToString:@"tada"]) {
-        id fromVal=[UIColor blueColor];
-        id toVal=[UIColor grayColor];
-        self.DemoView.Pop(nil).Play();
-        
-    }
-    
-    if ([selectValue isEqualToString:@"countdown"]) {
-       
-//        self.DemoView.CountDown(nil).Play();
-    }
+//    if ([selectValue isEqualToString:@"pop"]) {
+//        self.DemoView.Pop(nil).Play();
+//    }
+//    if ([selectValue isEqualToString:@"bounce"]) {
+//        id toValue =[NSValue valueWithCGPoint:CGPointMake((0), 0)];
+//        self.DemoView.Bounce(toValue).Bounciness(4).Autoreverses(NO).Play();
+//
+//        [self.DemoView PBAnimateStartCallback:^{
+//            NSLog(@"bounce 动画开始");
+//        }];
+//        
+//        [self.DemoView PBAnimateEndCallback:^() {
+//            NSLog(@"bounce 动画结束");
+//        }];
+//        
+//    }
+//    if ([selectValue isEqualToString:@"flash"]) {
+//        self.DemoView.Flash(nil).Play();
+//    }
+//    if ([selectValue isEqualToString:@"pulse"]) {
+//        id toValue =[NSValue valueWithCGSize:CGSizeMake(200, 200)];
+//        self.DemoView.Pulse(toValue).Play();
+//    }
+//    if ([selectValue isEqualToString:@"rubberBand"]) {
+//        self.DemoView.Rubber(nil).Play();
+//        
+//    }
+//    if ([selectValue isEqualToString:@"swing"]) {
+//        self.DemoView.Swing(nil).Play();
+//        [self.DemoView PBAnimateEndCallback:^() {
+//            NSLog(@"swing finish");
+//        }];
+//       
+//    }
+//    
+//    if ([selectValue isEqualToString:@"tada"]) {
+//        id fromVal=[UIColor blueColor];
+//        id toVal=[UIColor grayColor];
+//        self.DemoView.Pop(nil).Play();
+//        
+//    }
+//    
+//    if ([selectValue isEqualToString:@"countdown"]) {
+//       
+////        self.DemoView.CountDown(nil).Play();
+//    }
     if ([selectValue isEqualToString:@"fadeIn"]) {
         id toVal=@0.5;
         self.DemoView.fadeIn(toVal).Play();
@@ -153,13 +153,16 @@
         id toVal=@0.5;
         self.DemoView.fadeInDown(toVal).Play();
     }
+    if ([selectValue isEqualToString:@"slideInDown"]) {
+        self.DemoView.slideInDown(nil).Play();
+    }
     NSLog(@"%@",[self.DemoDataList objectAtIndex:indexPath.row]);
 
 }
 
 #pragma mark -- 初始化数据
 -(void)initData{
-    self.DemoDataList=[[NSArray alloc]initWithObjects:@"bounce",@"flash",@"pulse",@"rubberBand",@"shake",@"swing",@"tada",@"countdown",@"fadeIn",@"fadeInDown",nil];
+    self.DemoDataList=[[NSArray alloc]initWithObjects:@"slideInDown",@"flash",@"pulse",@"rubberBand",@"shake",@"swing",@"tada",@"countdown",@"fadeIn",@"fadeInDown",nil];
     
 }
 #pragma mark -- 事件

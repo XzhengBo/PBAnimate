@@ -59,38 +59,39 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^Autoreverses)(BOOL vaule);
 
 
-
-#pragma mark 动画类型
-/**
- *  Shake动画，参数：X轴位置，默认：原位置-50
- */
+//
+//#pragma mark 动画类型
+///**
+// *  Shake动画，参数：X轴位置，默认：原位置-50
+// */
 @property(nonatomic,readonly) PBAnimateView *(^Shake)(id vaule);
-/**
- *  POP动画，参数：放大bounds，默认：放大2倍
- */
-@property(nonatomic,readonly) PBAnimateView *(^Pop)(id vaule);
-/**
- *  Bounce动画，参数：Y轴移动位置，默认：原位置-20
- */
-@property(nonatomic,readonly) PBAnimateView *(^Bounce)(id vaule);
-/**
- *  flash动画，参数：透明度，默认：0
- */
-@property(nonatomic,readonly) PBAnimateView *(^Flash)(id vaule);
-/**
- *  pluse动画，参数：放大bounds，默认：bounds+30
- */
-@property(nonatomic,readonly) PBAnimateView *(^Pulse)(id vaule);
-/**
- *  设置Rubber动画，参数速度，范围：0~20
- */
-@property(nonatomic,readonly) PBAnimateView *(^Rubber)(id vaule);
-
-@property(nonatomic,readonly) PBAnimateView *(^Swing)(id vaule);
-
-@property(nonatomic,readonly) PBAnimateView *(^Tada)(id vaule);
-
-@property(nonatomic,readonly) PBAnimateView *(^CountDown)(id vaule);
+///**
+// *  POP动画，参数：放大bounds，默认：放大2倍
+// */
+//@property(nonatomic,readonly) PBAnimateView *(^Pop)(id vaule);
+///**
+// *  Bounce动画，参数：Y轴移动位置，默认：原位置-20
+// */
+//@property(nonatomic,readonly) PBAnimateView *(^Bounce)(id vaule);
+///**
+// *  flash动画，参数：透明度，默认：0
+// */
+//@property(nonatomic,readonly) PBAnimateView *(^Flash)(id vaule);
+///**
+// *  pluse动画，参数：放大bounds，默认：bounds+30
+// */
+//@property(nonatomic,readonly) PBAnimateView *(^Pulse)(id vaule);
+///**
+// *  设置Rubber动画，参数速度，范围：0~20
+// */
+//@property(nonatomic,readonly) PBAnimateView *(^Rubber)(id vaule);
+//
+//@property(nonatomic,readonly) PBAnimateView *(^Swing)(id vaule);
+//
+//@property(nonatomic,readonly) PBAnimateView *(^Tada)(id vaule);
+//
+//@property(nonatomic,readonly) PBAnimateView *(^CountDown)(id vaule);
+//
 
 #pragma mark 封装基础动画
 #pragma mark FadeIn
