@@ -72,7 +72,7 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 /**
  *  播放完成移除
  */
-@property(nonatomic,readonly) PBAnimateView *(^removedOnCompletion)(BOOL vaule);
+@property(nonatomic,readonly) PBAnimateView *(^ww)(BOOL vaule);
 
 #pragma mark 封装时间函数
 @property(nonatomic,readonly) PBAnimateView *(^Linear)(void);
@@ -129,9 +129,9 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^fadeOutUp)(void);
 #pragma mark SlideIn
 @property(nonatomic,readonly) PBAnimateView *(^slideInDown)(void);
-@property(nonatomic,readonly) PBAnimateView *(^slideInRight)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^slideInLeft)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^slideInUp)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^slideInRight)(void);
+@property(nonatomic,readonly) PBAnimateView *(^slideInLeft)(void);
+@property(nonatomic,readonly) PBAnimateView *(^slideInUp)(void);
 #pragma mark SlideOut
 @property(nonatomic,readonly) PBAnimateView *(^slideOutDown)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^slideOutUp)(id vaule);
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^RoateInUpRight)(void);
 @property(nonatomic,readonly) PBAnimateView *(^RoateInUpLeft)(void);
 #pragma mark RoateOut
-@property(nonatomic,readonly) PBAnimateView *(^RoateOut)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^RoateOut)(void);
 @property(nonatomic,readonly) PBAnimateView *(^RoateOutDownLeft)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^RoateOutDownRight)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^RoateOutUpRight)(id vaule);

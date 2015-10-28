@@ -259,12 +259,30 @@
 
 -(PBAnimateView *(^)(void))Bounce{
     return ^(void){
-        switch (self.animationType) {
-            case SpringAnimation:
-//                self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-                break;
-            default:
-                break;
+
+        if ([self.animateType isEqualToString:@"fadeOutLeft"]) {
+            
+            [self initPBAnimate:SpringAnimation];
+            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+            self.SpringAni.fromValue=[NSNumber numberWithFloat:300];
+            self.SpringAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+            self.animateType=@"fadeOutLeft_Bounce";
+            
+            [self initHelpPBAnimate:BasicAnimation];
+            self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+            self.HelpBasicAni.fromValue=@1;
+            self.HelpBasicAni.toValue=@0;
+            self.HelpAnimateType=@"fadeOutLeft_help_Bounce";
+            NSLog(@"是fadeOutLeft");
+        }
+        
+        if ([self.animateType isEqualToString:@"slideInDown"]) {
+            [self initPBAnimate:SpringAnimation];
+            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+            self.SpringAni.fromValue=[NSNumber numberWithFloat:-300];
+            self.SpringAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+            self.animateType=@"slideInDown";
+            NSLog(@"slideInDown");
         }
         return self;
     };
@@ -631,6 +649,21 @@
     };
 }
 
+-(PBAnimateView *(^)(void))RoateOut{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.toValue=@(M_PI);;
+        self.animateType=@"RoateOut";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"RoateOut_help";
+        return self;
+    };
+}
 -(PBAnimateView *(^)(void))RoateInDownLeft{
     return ^(void){
         [self initPBAnimate:BasicAnimation];
@@ -698,6 +731,18 @@
         return self;
     };
 }
+
+-(PBAnimateView *(^)(void))slideInDown{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:-300];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.animateType=@"slideInDown";
+        return self;
+    };
+}
+
 #pragma mark 动画事件
 
 -(PBAnimateView *(^)(void))Play{
@@ -707,6 +752,7 @@
         switch (self.animationType) {
             case SpringAnimation:
                 [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
+                [self.layer pop_addAnimation:self.HelpBasicAni forKey:self.HelpAnimateType];
                 
                 break;
             case BasicAnimation:
@@ -850,6 +896,14 @@
 -(void)recoveryLayer{
     self.frame=self.initSize;
     self.layer.opacity=1;
+    
+    self.BasicAni=nil;
+    self.HelpBasicAni=nil;
+    self.SpringAni=nil;
+    self.HelpSpringAni=nil;
+    self.DecayAni=nil;
+
+    [self.layer removeAllAnimations];
 }
 //
 ///**

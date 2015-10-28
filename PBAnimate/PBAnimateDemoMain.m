@@ -228,23 +228,23 @@
         self.DemoView.fadeInLeft().Play();
     }
     if ([selectValue isEqualToString:@"fadeOut"]) {
-        self.DemoView.fadeOut().Play();
+        self.DemoView.fadeOut().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeOutDown"]) {
-        self.DemoView.fadeOutDown().Play();
+        self.DemoView.fadeOutDown().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeOutLeft"]) {
-        self.DemoView.fadeOutLeft().Play();
+        self.DemoView.fadeOutLeft().Duration(1).Bounce().Play();
     }
     if ([selectValue isEqualToString:@"fadeOutRight"]) {
-        self.DemoView.fadeOutRight().Play();
+        self.DemoView.fadeOutRight().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeOutUp"]) {
-        self.DemoView.fadeOutUp().Play();
+        self.DemoView.fadeOutUp().Duration(1).Play();
     }
     
     if ([selectValue isEqualToString:@"slideInDown"]) {
-//        self.DemoView.slideInDown().Duration(1).Play();
+        self.DemoView.slideInDown().Duration(1).Bounce().Play();
     }
     if ([selectValue isEqualToString:@"RoateIn"]) {
         self.DemoView.RoateIn().Duration(1).Play();
@@ -261,6 +261,9 @@
     }
     if ([selectValue isEqualToString:@"flipYOut"]) {
         self.DemoView.flipYOut().Autoreverses(YES).Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"RoateOut"]) {
+        self.DemoView.RoateOut().Duration(2).Play();
     }
     NSLog(@"%@",selectValue);
 
