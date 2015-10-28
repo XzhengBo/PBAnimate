@@ -11,7 +11,15 @@
 
 @interface PBAnimateDemoMain()
 
-@property(nonatomic)NSArray *DemoDataList;
+@property(nonatomic)NSMutableArray *DemoDataList;
+@property(nonatomic)NSArray *FadeIn;
+@property(nonatomic)NSArray *FadeOut;
+@property(nonatomic)NSArray *SlideIn;
+@property(nonatomic)NSArray *SlideOut;
+@property(nonatomic)NSArray *RoateIn;
+@property(nonatomic)NSArray *RoateOut;
+
+
 @property(nonatomic)UITableView *DemoTableView;
 @property(nonatomic)UIView *DemoContentView;
 @property(nonatomic)PBAnimateView *DemoView;
@@ -78,7 +86,36 @@
 
 #pragma mark -- tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [[self.DemoDataList objectAtIndex:section]count];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.DemoDataList.count;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    switch (section) {
+        case 0:
+            return @"FadeIn";
+            break;
+        case 1:
+            return @"FadeOut";
+            break;
+        case 2:
+            return @"RoateIn";
+            break;
+        case 3:
+            return @"RoateOut";
+            break;
+        case 4:
+            return @"SlideIn";
+            break;
+        case 5:
+            return @"SlideOut";
+            break;
+        default:
+            return @"";
+            break;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *reuseIdentifier=@"reuseIdentifier";
@@ -86,19 +123,42 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-    cell.textLabel.text=self.DemoDataList[indexPath.row];
+    
+    switch (indexPath.section) {
+        case 0:
+            cell.textLabel.text=self.FadeIn[indexPath.row];
+            break;
+        case 1:
+            cell.textLabel.text=self.FadeOut[indexPath.row];
+            break;
+        case 2:
+            cell.textLabel.text=self.RoateIn[indexPath.row];
+            break;
+        case 3:
+            cell.textLabel.text=self.RoateOut[indexPath.row];
+            break;
+        case 4:
+            cell.textLabel.text=self.SlideIn[indexPath.row];
+            break;
+        case 5:
+            cell.textLabel.text=self.SlideOut[indexPath.row];
+            break;
+        default:
+            break;
+    }
+    
     cell.backgroundColor=[UIColor colorWithRed:249.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *selectValue=[self.DemoDataList objectAtIndex:indexPath.row];
-    if ([selectValue isEqualToString:@"shake"]) {
-//        self.DemoView.Shake(nil).Play();
-        [self.DemoView PBAnimateEndCallback:^() {
-                NSLog(@"动完了");
-        }];
-        
-    }
+    NSString *selectValue=[[self.DemoDataList objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+//    if ([selectValue isEqualToString:@"shake"]) {
+////        self.DemoView.Shake(nil).Play();
+//        [self.DemoView PBAnimateEndCallback:^() {
+//                NSLog(@"动完了");
+//        }];
+//        
+//    }
 //    if ([selectValue isEqualToString:@"pop"]) {
 //        self.DemoView.Pop(nil).Play();
 //    }
@@ -145,26 +205,57 @@
 //       
 ////        self.DemoView.CountDown(nil).Play();
 //    }
+    
     if ([selectValue isEqualToString:@"fadeIn"]) {
         self.DemoView.fadeIn().Duration(2).Play();
     }
     if ([selectValue isEqualToString:@"fadeInDown"]) {
-        id toVal=@0.5;
-        self.DemoView.fadeInDown(toVal).Play();
+        self.DemoView.fadeInDown().Play();
     }
-    if ([selectValue isEqualToString:@"slideInDown"]) {
-        self.DemoView.slideInDown().Duration(5).Play();
+    if ([selectValue isEqualToString:@"fadeInUp"]) {
+        self.DemoView.fadeInUp().Linear().Play();
+    }
+    if ([selectValue isEqualToString:@"fadeInRight"]) {
+        self.DemoView.fadeInRight().Play();
+    }
+    if ([selectValue isEqualToString:@"fadeInLeft"]) {
+        self.DemoView.fadeInLeft().Play();
     }
     if ([selectValue isEqualToString:@"fadeOut"]) {
         self.DemoView.fadeOut().Play();
     }
-    NSLog(@"%@",[self.DemoDataList objectAtIndex:indexPath.row]);
+    if ([selectValue isEqualToString:@"fadeOutDown"]) {
+        self.DemoView.fadeOutDown().Play();
+    }
+    if ([selectValue isEqualToString:@"fadeOutLeft"]) {
+        self.DemoView.fadeOutLeft().Play();
+    }
+    if ([selectValue isEqualToString:@"fadeOutRight"]) {
+        self.DemoView.fadeOutRight().Play();
+    }
+    if ([selectValue isEqualToString:@"fadeOutUp"]) {
+        self.DemoView.fadeOutUp().Play();
+    }
+    
+    if ([selectValue isEqualToString:@"slideInDown"]) {
+        self.DemoView.slideInDown().Duration(1).Play();
+    }
+    
+    NSLog(@"%@",selectValue);
 
 }
 
 #pragma mark -- 初始化数据
 -(void)initData{
-    self.DemoDataList=[[NSArray alloc]initWithObjects:@"slideInDown",@"fadeIn",@"fadeOut",@"fadeInDown",nil];
+    self.FadeIn=[[NSArray alloc]initWithObjects:@"fadeIn",@"fadeInDown",@"fadeInUp",@"fadeInRight",@"fadeInLeft", nil];
+    self.FadeOut=[[NSArray alloc]initWithObjects:@"fadeOut",@"fadeOutDown",@"fadeOutUp",@"fadeOutRight",@"fadeOutLeft", nil];
+    self.RoateIn=[[NSArray alloc]initWithObjects:@"RoateIn",@"RoateInDownLeft",@"RoateInDownRight",@"RoateInUpRight",@"RoateInUpLeft", nil];
+    self.RoateOut=[[NSArray alloc]initWithObjects:@"RoateOut",@"RoateOutDownLeft",@"RoateOutDownRight",@"RoateOutUpRight",@"RoateOutUpLeft", nil];
+    self.SlideIn=[[NSArray alloc]initWithObjects:@"slideInDown",@"slideInRight",@"slideInLeft",@"slideInUp", nil];
+    self.SlideOut=[[NSArray alloc]initWithObjects:@"slideOutDown",@"slideOutUp",@"slideOutRight",@"slideOutLeft", nil];
+    
+    self.DemoDataList=[[NSMutableArray alloc]initWithObjects:self.FadeIn,self.FadeOut,self.RoateIn,self.RoateOut,self.SlideIn,self.SlideOut,nil];
+    
 //    self.DemoDataList=[[NSArray alloc]initWithObjects:@"slideInDown",@"flash",@"pulse",@"rubberBand",@"shake",@"swing",@"tada",@"countdown",@"fadeIn",@"fadeInDown",nil];
     
 }

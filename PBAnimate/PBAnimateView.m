@@ -411,31 +411,9 @@
 //        
 //        return self;
 //    };
-//}
+//} 
 
 #pragma mark 封装基础动画
--(PBAnimateView *(^)(void))slideInDown{
-    return ^(void){
-        [self initPBAnimate:BasicAnimation];
-        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:-10];
-        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
-//        self.BasicAni.duration=self.duration;
-        self.animateType=@"slideInDown";
-        
-        [self initHelpPBAnimate:BasicAnimation];
-        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
-        self.HelpBasicAni.fromValue=@0;
-        self.HelpBasicAni.toValue=@1;
-//        fade.duration=self.duration;
-        self.HelpAnimateType=@"fadeHelp";
-
-       
-       
-         return self;
-    };
-}
-
 -(PBAnimateView *(^)(void))fadeIn{
     return ^(void){
         [self initPBAnimate:BasicAnimation];
@@ -446,6 +424,75 @@
         return self;
     };
 }
+-(PBAnimateView *(^)(void))fadeInDown{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:-300];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.animateType=@"FadeInDown";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"FadeInDown_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))fadeInLeft{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:300];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.animateType=@"fadeInLeft";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"fadeInLeft_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))fadeInRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:10];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.animateType=@"fadeInRight";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"fadeInRight_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))fadeInUp{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:300];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.animateType=@"fadeInUp";
+    
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"fadeInUp_help";
+        return self;
+    };
+}
+
+
 -(PBAnimateView *(^)(void))fadeOut{
     return ^(void){
         [self initPBAnimate:BasicAnimation];
@@ -457,7 +504,73 @@
     };
 }
 
+-(PBAnimateView *(^)(void))fadeOutDown{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:-300];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.animateType=@"fadeOutDown";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"fadeOutDown_help";
+        return self;
+    };
+}
 
+-(PBAnimateView *(^)(void))fadeOutLeft{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:300];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.animateType=@"fadeOutLeft";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"fadeOutLeft_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))fadeOutRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:10];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.animateType=@"fadeOutRight";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"fadeOutRight_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))fadeOutUp{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:300];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.animateType=@"fadeOutUp";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"fadeOutUp_help";
+        return self;
+    };
+}
 #pragma mark 动画事件
 
 -(PBAnimateView *(^)(void))Play{
@@ -601,10 +714,15 @@
 // */
 - (void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished{
     if (finished) {
-        self.frame=self.initSize;
-        self.layer.opacity=1;
-        NSLog(@"pop_animationDidStop");
+        
+        [self performSelector:@selector(recoveryLayer) withObject:nil afterDelay:1.0f];
+        
     }
+}
+
+-(void)recoveryLayer{
+    self.frame=self.initSize;
+    self.layer.opacity=1;
 }
 //
 ///**

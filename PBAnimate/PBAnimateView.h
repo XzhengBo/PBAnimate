@@ -105,16 +105,16 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 #pragma mark 封装基础动画
 #pragma mark FadeIn
 @property(nonatomic,readonly) PBAnimateView *(^fadeIn)(void);
-@property(nonatomic,readonly) PBAnimateView *(^fadeInDown)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^fadeInLeft)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^fadeInRight)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^fadeInUp)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^fadeInDown)(void);
+@property(nonatomic,readonly) PBAnimateView *(^fadeInLeft)(void);
+@property(nonatomic,readonly) PBAnimateView *(^fadeInRight)(void);
+@property(nonatomic,readonly) PBAnimateView *(^fadeInUp)(void);
 #pragma mark FadeOut
 @property(nonatomic,readonly) PBAnimateView *(^fadeOut)(void);
-@property(nonatomic,readonly) PBAnimateView *(^fadeOutDown)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^fadeOutLeft)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^fadeOutRight)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^fadeOutUp)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^fadeOutDown)(void);
+@property(nonatomic,readonly) PBAnimateView *(^fadeOutLeft)(void);
+@property(nonatomic,readonly) PBAnimateView *(^fadeOutRight)(void);
+@property(nonatomic,readonly) PBAnimateView *(^fadeOutUp)(void);
 #pragma mark SlideIn
 @property(nonatomic,readonly) PBAnimateView *(^slideInDown)(void);
 @property(nonatomic,readonly) PBAnimateView *(^slideInRight)(id vaule);
@@ -129,7 +129,6 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^RoateIn)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^RoateInDownLeft)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^RoateInDownRight)(id vaule);
-
 @property(nonatomic,readonly) PBAnimateView *(^RoateInUpRight)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^RoateInUpLeft)(id vaule);
 #pragma mark RoateOut
