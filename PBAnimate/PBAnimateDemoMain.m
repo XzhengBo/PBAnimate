@@ -146,7 +146,7 @@
 ////        self.DemoView.CountDown(nil).Play();
 //    }
     if ([selectValue isEqualToString:@"fadeIn"]) {
-        self.DemoView.fadeIn().Play();
+        self.DemoView.fadeIn().Duration(2).Play();
     }
     if ([selectValue isEqualToString:@"fadeInDown"]) {
         id toVal=@0.5;

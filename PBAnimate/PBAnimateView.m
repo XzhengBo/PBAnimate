@@ -10,9 +10,16 @@
 @interface PBAnimateView()
 
 @property(nonatomic)NSString * animateType;
+@property(nonatomic)NSString * HelpAnimateType;
+
 @property(nonatomic)POPSpringAnimation *SpringAni;
 @property(nonatomic)POPBasicAnimation *BasicAni;
 @property(nonatomic)POPDecayAnimation *DecayAni;
+
+@property(nonatomic)POPSpringAnimation *HelpSpringAni;
+@property(nonatomic)POPBasicAnimation *HelpBasicAni;
+@property(nonatomic)POPDecayAnimation *HelpDecayAni;
+
 @property(nonatomic)PBAnimationType animationType;
 @property(nonatomic)CGRect initSize;
 
@@ -140,6 +147,7 @@
         switch (self.animationType) {
             case BasicAnimation:
                 self.BasicAni.duration =vaule;
+                self.HelpBasicAni.duration=vaule;
                 break;
             default:
                 break;
@@ -155,6 +163,7 @@
         switch (self.animationType) {
             case BasicAnimation:
                 self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+                self.HelpBasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
                 break;
             default:
                 break;
@@ -168,6 +177,7 @@
         switch (self.animationType) {
             case BasicAnimation:
                 self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+                self.HelpBasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
                 break;
             default:
                 break;
@@ -181,6 +191,7 @@
         switch (self.animationType) {
             case BasicAnimation:
                 self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+                self.HelpBasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
                 break;
             default:
                 break;
@@ -194,6 +205,7 @@
         switch (self.animationType) {
             case BasicAnimation:
                 self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                self.HelpBasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
                 break;
             default:
                 break;
@@ -408,19 +420,17 @@
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
         self.BasicAni.fromValue=[NSNumber numberWithFloat:-10];
         self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
-        if (!self.BasicAni.duration) {
-            self.BasicAni.duration=2;
-        }
-        self.BasicAni.name=@"slideInDown";
+//        self.BasicAni.duration=self.duration;
+        self.animateType=@"slideInDown";
         
-        POPBasicAnimation *fade=[POPBasicAnimation animation];
-        fade.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
-        fade.fromValue=@0;
-        fade.toValue=@1;
-        fade.duration=self.BasicAni.duration;
-        fade.name=@"fade";
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+//        fade.duration=self.duration;
+        self.HelpAnimateType=@"fadeHelp";
 
-        [self.layer pop_addAnimation:fade forKey:@"fade"];
+       
        
          return self;
     };
@@ -457,9 +467,11 @@
         switch (self.animationType) {
             case SpringAnimation:
                 [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
+                
                 break;
             case BasicAnimation:
                 [self.layer pop_addAnimation:self.BasicAni forKey:self.animateType];
+                [self.layer pop_addAnimation:self.HelpBasicAni forKey:self.HelpAnimateType];
                 break;
             case DecayAnimation:
                 [self.layer pop_addAnimation:self.DecayAni forKey:self.animateType];
@@ -545,7 +557,25 @@
     }
 }
 
-
+-(void)initHelpPBAnimate:(PBAnimationType)animationType{
+    self.animationType=animationType;
+    self.initSize=self.layer.frame;
+    switch (animationType) {
+        case BasicAnimation:
+            self.HelpBasicAni=[POPBasicAnimation animation];
+            self.HelpBasicAni.delegate=self;
+            break;
+        case DecayAnimation:
+            self.HelpDecayAni=[POPDecayAnimation animation];
+            break;
+        case SpringAnimation:
+            self.HelpSpringAni=[POPSpringAnimation animation];
+            self.HelpSpringAni.delegate=self;
+            break;
+        default:
+            break;
+    }
+}
 
 //#pragma mark Delegate
 ///**
