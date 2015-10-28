@@ -57,14 +57,23 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
  *  设置是否自动恢复
  */
 @property(nonatomic,readonly) PBAnimateView *(^Autoreverses)(BOOL vaule);
+/**
+ *  设置动画持续时间
+ */
+@property(nonatomic,readonly) PBAnimateView *(^Duration)(BOOL vaule);
 
-
+#pragma mark 封装时间函数
+@property(nonatomic,readonly) PBAnimateView *(^Linear)(void);
+@property(nonatomic,readonly) PBAnimateView *(^EaseIn)(void);
+@property(nonatomic,readonly) PBAnimateView *(^EaseOut)(void);
+@property(nonatomic,readonly) PBAnimateView *(^EaseInEaseOut)(void);
+@property(nonatomic,readonly) PBAnimateView *(^Bounce)(void);
 //
 //#pragma mark 动画类型
 ///**
 // *  Shake动画，参数：X轴位置，默认：原位置-50
 // */
-@property(nonatomic,readonly) PBAnimateView *(^Shake)(id vaule);
+//@property(nonatomic,readonly) PBAnimateView *(^Shake)(id vaule);
 ///**
 // *  POP动画，参数：放大bounds，默认：放大2倍
 // */
@@ -95,19 +104,19 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 
 #pragma mark 封装基础动画
 #pragma mark FadeIn
-@property(nonatomic,readonly) PBAnimateView *(^fadeIn)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^fadeIn)(void);
 @property(nonatomic,readonly) PBAnimateView *(^fadeInDown)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^fadeInLeft)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^fadeInRight)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^fadeInUp)(id vaule);
 #pragma mark FadeOut
-@property(nonatomic,readonly) PBAnimateView *(^fadeOut)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^fadeOut)(void);
 @property(nonatomic,readonly) PBAnimateView *(^fadeOutDown)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^fadeOutLeft)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^fadeOutRight)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^fadeOutUp)(id vaule);
 #pragma mark SlideIn
-@property(nonatomic,readonly) PBAnimateView *(^slideInDown)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^slideInDown)(void);
 @property(nonatomic,readonly) PBAnimateView *(^slideInRight)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^slideInLeft)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^slideInUp)(id vaule);

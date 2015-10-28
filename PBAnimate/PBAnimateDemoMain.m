@@ -93,7 +93,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *selectValue=[self.DemoDataList objectAtIndex:indexPath.row];
     if ([selectValue isEqualToString:@"shake"]) {
-        self.DemoView.Shake(nil).Play();
+//        self.DemoView.Shake(nil).Play();
         [self.DemoView PBAnimateEndCallback:^() {
                 NSLog(@"动完了");
         }];
@@ -146,15 +146,17 @@
 ////        self.DemoView.CountDown(nil).Play();
 //    }
     if ([selectValue isEqualToString:@"fadeIn"]) {
-        id toVal=@0.5;
-        self.DemoView.fadeIn(toVal).Play();
+        self.DemoView.fadeIn().Play();
     }
     if ([selectValue isEqualToString:@"fadeInDown"]) {
         id toVal=@0.5;
         self.DemoView.fadeInDown(toVal).Play();
     }
     if ([selectValue isEqualToString:@"slideInDown"]) {
-        self.DemoView.slideInDown(nil);
+        self.DemoView.slideInDown().Duration(5).Play();
+    }
+    if ([selectValue isEqualToString:@"fadeOut"]) {
+        self.DemoView.fadeOut().Play();
     }
     NSLog(@"%@",[self.DemoDataList objectAtIndex:indexPath.row]);
 
@@ -162,7 +164,8 @@
 
 #pragma mark -- 初始化数据
 -(void)initData{
-    self.DemoDataList=[[NSArray alloc]initWithObjects:@"slideInDown",@"flash",@"pulse",@"rubberBand",@"shake",@"swing",@"tada",@"countdown",@"fadeIn",@"fadeInDown",nil];
+    self.DemoDataList=[[NSArray alloc]initWithObjects:@"slideInDown",@"fadeIn",@"fadeOut",@"fadeInDown",nil];
+//    self.DemoDataList=[[NSArray alloc]initWithObjects:@"slideInDown",@"flash",@"pulse",@"rubberBand",@"shake",@"swing",@"tada",@"countdown",@"fadeIn",@"fadeInDown",nil];
     
 }
 #pragma mark -- 事件

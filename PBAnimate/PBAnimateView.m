@@ -135,24 +135,102 @@
         return self;
     };
 }
-
-//#pragma mark 动画类型
--(PBAnimateView *(^)(id vaule))Shake{
-    return ^(id vaule){
-        [self initPBAnimate:SpringAnimation];
-        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
-        if (vaule) {
-            self.SpringAni.toValue=vaule;
+-(PBAnimateView *(^)(BOOL vaule))Duration{
+    return ^(BOOL vaule){
+        switch (self.animationType) {
+            case BasicAnimation:
+                self.BasicAni.duration =vaule;
+                break;
+            default:
+                break;
         }
-        else{
-            
-            self.SpringAni.toValue=[NSNumber numberWithFloat:self.frame.origin.x];
-        }
-//        self.SpringAni.autoreverses=YES;
-        self.animateType=@"shake";
         return self;
     };
 }
+
+#pragma mark 封装动画时间函数
+
+-(PBAnimateView *(^)(void))Linear{
+    return ^(void){
+        switch (self.animationType) {
+            case BasicAnimation:
+                self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+                break;
+            default:
+                break;
+        }
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))EaseIn{
+    return ^(void){
+        switch (self.animationType) {
+            case BasicAnimation:
+                self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+                break;
+            default:
+                break;
+        }
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))EaseOut{
+    return ^(void){
+        switch (self.animationType) {
+            case BasicAnimation:
+                self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+                break;
+            default:
+                break;
+        }
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))EaseInEaseOut{
+    return ^(void){
+        switch (self.animationType) {
+            case BasicAnimation:
+                self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                break;
+            default:
+                break;
+        }
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))Bounce{
+    return ^(void){
+        switch (self.animationType) {
+            case SpringAnimation:
+//                self.BasicAni.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                break;
+            default:
+                break;
+        }
+        return self;
+    };
+}
+////#pragma mark 动画类型
+//-(PBAnimateView *(^)(id vaule))Shake{
+//    return ^(id vaule){
+//        [self initPBAnimate:SpringAnimation];
+//        self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+//        if (vaule) {
+//            self.SpringAni.toValue=vaule;
+//        }
+//        else{
+//            
+//            self.SpringAni.toValue=[NSNumber numberWithFloat:self.frame.origin.x];
+//        }
+////        self.SpringAni.autoreverses=YES;
+//        self.animateType=@"shake";
+//        return self;
+//    };
+//}
 //
 //-(PBAnimateView *(^)(id vaule))Pop{
 //    return ^(id vaule){
@@ -324,50 +402,51 @@
 //}
 
 #pragma mark 封装基础动画
--(PBAnimateView *(^)(id vaule))slideInDown{
-    return ^(id vaule){
+-(PBAnimateView *(^)(void))slideInDown{
+    return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
         self.BasicAni.fromValue=[NSNumber numberWithFloat:-10];
-        if (vaule) {
-            self.BasicAni.toValue =vaule;
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        if (!self.BasicAni.duration) {
+            self.BasicAni.duration=2;
         }
-        else{
-            NSLog(@"%f",self.initSize.origin.y);
-            self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
-        }
-        self.BasicAni.duration=5;
-        [self.layer pop_addAnimation:self.BasicAni forKey:@"slideInDown"];
+        self.BasicAni.name=@"slideInDown";
         
-       
-        self.BasicAni=[POPBasicAnimation animation];
-        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
-        self.BasicAni.fromValue=@0;
-        self.BasicAni.duration=5;
-        self.BasicAni.toValue=@1;
-        self.BasicAni.name=@"fade";
-        //self.SpringAni.autoreverses=YES;
-        [self.layer pop_addAnimation:self.BasicAni forKey:@"fade"];
+        POPBasicAnimation *fade=[POPBasicAnimation animation];
+        fade.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        fade.fromValue=@0;
+        fade.toValue=@1;
+        fade.duration=self.BasicAni.duration;
+        fade.name=@"fade";
+
+        [self.layer pop_addAnimation:fade forKey:@"fade"];
        
          return self;
     };
 }
 
--(PBAnimateView *(^)(id vaule))fadeIn{
-    return ^(id vaule){
+-(PBAnimateView *(^)(void))fadeIn{
+    return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
-        self.BasicAni.autoreverses=YES;
-        if (vaule) {
-            self.BasicAni.toValue =vaule;
-        }
-        else{
-            self.BasicAni.toValue =@0;
-        }
+        self.BasicAni.fromValue =@0;
+        self.BasicAni.toValue =@1;
         self.animateType=@"fadeIn";
         return self;
     };
 }
+-(PBAnimateView *(^)(void))fadeOut{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.BasicAni.fromValue =@1;
+        self.BasicAni.toValue =@0;
+        self.animateType=@"fadeOut";
+        return self;
+    };
+}
+
 
 #pragma mark 动画事件
 
@@ -493,6 +572,7 @@
 - (void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished{
     if (finished) {
         self.frame=self.initSize;
+        self.layer.opacity=1;
         NSLog(@"pop_animationDidStop");
     }
 }
