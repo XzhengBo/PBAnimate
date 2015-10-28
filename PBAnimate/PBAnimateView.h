@@ -61,6 +61,18 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
  *  设置动画持续时间
  */
 @property(nonatomic,readonly) PBAnimateView *(^Duration)(BOOL vaule);
+/**
+ *  设置动画延迟
+ */
+@property(nonatomic,readonly) PBAnimateView *(^Delay)(float vaule);
+/**
+ *  永远循环播放
+ */
+@property(nonatomic,readonly) PBAnimateView *(^RepeatForever)(BOOL vaule);
+/**
+ *  播放完成移除
+ */
+@property(nonatomic,readonly) PBAnimateView *(^removedOnCompletion)(BOOL vaule);
 
 #pragma mark 封装时间函数
 @property(nonatomic,readonly) PBAnimateView *(^Linear)(void);
@@ -126,11 +138,11 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^slideOutRight)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^slideOutLeft)(id vaule);
 #pragma mark RoateIn
-@property(nonatomic,readonly) PBAnimateView *(^RoateIn)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^RoateInDownLeft)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^RoateInDownRight)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^RoateInUpRight)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^RoateInUpLeft)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^RoateIn)(void);
+@property(nonatomic,readonly) PBAnimateView *(^RoateInDownLeft)(void);
+@property(nonatomic,readonly) PBAnimateView *(^RoateInDownRight)(void);
+@property(nonatomic,readonly) PBAnimateView *(^RoateInUpRight)(void);
+@property(nonatomic,readonly) PBAnimateView *(^RoateInUpLeft)(void);
 #pragma mark RoateOut
 @property(nonatomic,readonly) PBAnimateView *(^RoateOut)(id vaule);
 @property(nonatomic,readonly) PBAnimateView *(^RoateOutDownLeft)(id vaule);
@@ -139,7 +151,10 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^RoateOutUpLeft)(id vaule);
 
 #pragma mark Flip
-
+@property(nonatomic,readonly) PBAnimateView *(^flipX)(void);
+@property(nonatomic,readonly) PBAnimateView *(^flipY)(void);
+@property(nonatomic,readonly) PBAnimateView *(^flipXOut)(void);
+@property(nonatomic,readonly) PBAnimateView *(^flipYOut)(void);
 #pragma mark Bounce
 
 

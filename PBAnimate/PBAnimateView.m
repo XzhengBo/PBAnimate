@@ -112,6 +112,7 @@
                 break;
             case BasicAnimation:
                 self.BasicAni.repeatCount =vaule;
+                 self.HelpBasicAni.repeatCount=vaule;
                 break;
             case DecayAnimation:
                 self.DecayAni.repeatCount =vaule;
@@ -128,9 +129,11 @@
         switch (self.animationType) {
             case SpringAnimation:
                 self.SpringAni.autoreverses=vaule;
+                
                 break;
             case BasicAnimation:
                 self.BasicAni.autoreverses =vaule;
+                self.HelpBasicAni.autoreverses=vaule;
                 break;
             case DecayAnimation:
                 self.DecayAni.autoreverses =vaule;
@@ -155,7 +158,47 @@
         return self;
     };
 }
+-(PBAnimateView *(^)(float vaule))Delay{
+    return ^(float vaule){
+        switch (self.animationType) {
+            case BasicAnimation:
+                self.BasicAni.beginTime=CACurrentMediaTime()+vaule;
+                self.HelpBasicAni.beginTime=CACurrentMediaTime()+vaule;
+                break;
+            default:
+                break;
+        }
+        return self;
+    };
+}
 
+-(PBAnimateView *(^)(BOOL vaule))repeatForever{
+    return ^(BOOL vaule){
+        switch (self.animationType) {
+            case BasicAnimation:
+                self.BasicAni.repeatForever=vaule;
+                self.HelpBasicAni.repeatForever=vaule;
+                break;
+            default:
+                break;
+        }
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(BOOL vaule))removedOnCompletion{
+    return ^(BOOL vaule){
+        switch (self.animationType) {
+            case BasicAnimation:
+                self.BasicAni.removedOnCompletion=vaule;
+                self.HelpBasicAni.removedOnCompletion=vaule;
+                break;
+            default:
+                break;
+        }
+        return self;
+    };
+}
 #pragma mark 封装动画时间函数
 
 -(PBAnimateView *(^)(void))Linear{
@@ -571,6 +614,90 @@
         return self;
     };
 }
+
+-(PBAnimateView *(^)(void))RoateIn{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.toValue=@(M_PI);;
+        self.animateType=@"RoateIn";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"RoateIn_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))RoateInDownLeft{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.toValue=@(M_PI);;
+        self.animateType=@"RoateInDownLeft";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"RoateInDownLeft_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))flipX{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationX];
+        self.BasicAni.toValue=@(M_PI/2);;
+        self.animateType=@"flipX";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))flipXOut{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationX];
+        self.BasicAni.toValue=@(M_PI/2);;
+        self.animateType=@"flipXOut";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"flipXOut_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))flipY{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationY];
+        self.BasicAni.toValue=@(M_PI/2);;
+        self.animateType=@"flipY";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))flipYOut{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationY];
+        self.BasicAni.toValue=@(M_PI/2);;
+        self.animateType=@"flipYOut";
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"flipYOut_help";
+        return self;
+    };
+}
 #pragma mark 动画事件
 
 -(PBAnimateView *(^)(void))Play{
@@ -715,7 +842,7 @@
 - (void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished{
     if (finished) {
         
-        [self performSelector:@selector(recoveryLayer) withObject:nil afterDelay:1.0f];
+        [self performSelector:@selector(recoveryLayer) withObject:nil afterDelay:0.5f];
         
     }
 }

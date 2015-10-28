@@ -18,7 +18,7 @@
 @property(nonatomic)NSArray *SlideOut;
 @property(nonatomic)NSArray *RoateIn;
 @property(nonatomic)NSArray *RoateOut;
-
+@property(nonatomic)NSArray *Flip;
 
 @property(nonatomic)UITableView *DemoTableView;
 @property(nonatomic)UIView *DemoContentView;
@@ -56,8 +56,8 @@
     [self.DemoContentView addSubview:self.DemoView];
     [self.view addSubview:self.DemoTableView];
     
-     UIBarButtonItem *StopAnimate=[[UIBarButtonItem alloc]initWithTitle:@"停止" style:UIBarButtonItemStylePlain target:self action:@selector(StopAnimate)];
-    [self.navigationItem setRightBarButtonItem:StopAnimate];
+//     UIBarButtonItem *StopAnimate=[[UIBarButtonItem alloc]initWithTitle:@"停止" style:UIBarButtonItemStylePlain target:self action:@selector(StopAnimate)];
+//    [self.navigationItem setRightBarButtonItem:StopAnimate];
     
     [self.DemoContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(64);
@@ -112,6 +112,9 @@
         case 5:
             return @"SlideOut";
             break;
+        case 6:
+            return @"Filp";
+            break;
         default:
             return @"";
             break;
@@ -142,6 +145,9 @@
             break;
         case 5:
             cell.textLabel.text=self.SlideOut[indexPath.row];
+            break;
+        case 6:
+            cell.textLabel.text=self.Flip[indexPath.row];
             break;
         default:
             break;
@@ -210,10 +216,10 @@
         self.DemoView.fadeIn().Duration(2).Play();
     }
     if ([selectValue isEqualToString:@"fadeInDown"]) {
-        self.DemoView.fadeInDown().Play();
+        self.DemoView.fadeInDown().Delay(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeInUp"]) {
-        self.DemoView.fadeInUp().Linear().Play();
+        self.DemoView.fadeInUp().Play();
     }
     if ([selectValue isEqualToString:@"fadeInRight"]) {
         self.DemoView.fadeInRight().Play();
@@ -238,9 +244,24 @@
     }
     
     if ([selectValue isEqualToString:@"slideInDown"]) {
-        self.DemoView.slideInDown().Duration(1).Play();
+//        self.DemoView.slideInDown().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"RoateIn"]) {
+        self.DemoView.RoateIn().Duration(1).Play();
     }
     
+    if ([selectValue isEqualToString:@"flipX"]) {
+        self.DemoView.flipX().Autoreverses(YES).Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"flipY"]) {
+        self.DemoView.flipY().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"flipXOut"]) {
+        self.DemoView.flipXOut().Autoreverses(YES).Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"flipYOut"]) {
+        self.DemoView.flipYOut().Autoreverses(YES).Duration(1).Play();
+    }
     NSLog(@"%@",selectValue);
 
 }
@@ -253,8 +274,8 @@
     self.RoateOut=[[NSArray alloc]initWithObjects:@"RoateOut",@"RoateOutDownLeft",@"RoateOutDownRight",@"RoateOutUpRight",@"RoateOutUpLeft", nil];
     self.SlideIn=[[NSArray alloc]initWithObjects:@"slideInDown",@"slideInRight",@"slideInLeft",@"slideInUp", nil];
     self.SlideOut=[[NSArray alloc]initWithObjects:@"slideOutDown",@"slideOutUp",@"slideOutRight",@"slideOutLeft", nil];
-    
-    self.DemoDataList=[[NSMutableArray alloc]initWithObjects:self.FadeIn,self.FadeOut,self.RoateIn,self.RoateOut,self.SlideIn,self.SlideOut,nil];
+    self.Flip=[[NSArray alloc]initWithObjects:@"flipX",@"flipY", @"flipXOut",@"flipYOut",nil];
+    self.DemoDataList=[[NSMutableArray alloc]initWithObjects:self.FadeIn,self.FadeOut,self.RoateIn,self.RoateOut,self.SlideIn,self.SlideOut,self.Flip,nil];
     
 //    self.DemoDataList=[[NSArray alloc]initWithObjects:@"slideInDown",@"flash",@"pulse",@"rubberBand",@"shake",@"swing",@"tada",@"countdown",@"fadeIn",@"fadeInDown",nil];
     
