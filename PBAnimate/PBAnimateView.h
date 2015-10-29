@@ -72,7 +72,7 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 /**
  *  播放完成移除
  */
-@property(nonatomic,readonly) PBAnimateView *(^ww)(BOOL vaule);
+@property(nonatomic,readonly) PBAnimateView *(^removedOnCompletion)(BOOL vaule);
 
 #pragma mark 封装时间函数
 @property(nonatomic,readonly) PBAnimateView *(^Linear)(void);

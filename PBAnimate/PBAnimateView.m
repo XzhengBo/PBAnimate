@@ -748,24 +748,25 @@
 -(PBAnimateView *(^)(void))Play{
     
     return ^(void){
-        
-        switch (self.animationType) {
-            case SpringAnimation:
-                [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
-                [self.layer pop_addAnimation:self.HelpBasicAni forKey:self.HelpAnimateType];
-                
-                break;
-            case BasicAnimation:
-                [self.layer pop_addAnimation:self.BasicAni forKey:self.animateType];
-                [self.layer pop_addAnimation:self.HelpBasicAni forKey:self.HelpAnimateType];
-                break;
-            case DecayAnimation:
-                [self.layer pop_addAnimation:self.DecayAni forKey:self.animateType];
-                break;
-            default:
-                break;
+//        NSLog(@"监听动画状态%@",[self.layer pop_animationForKey:self.animateType]);
+        if ([self.layer pop_animationForKey:self.animateType]==NULL) {
+            switch (self.animationType) {
+                case SpringAnimation:
+                    [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
+                    [self.layer pop_addAnimation:self.HelpBasicAni forKey:self.HelpAnimateType];
+                    break;
+                case BasicAnimation:
+                    [self.layer pop_addAnimation:self.BasicAni forKey:self.animateType];
+                    [self.layer pop_addAnimation:self.HelpBasicAni forKey:self.HelpAnimateType];
+                    break;
+                case DecayAnimation:
+                    [self.layer pop_addAnimation:self.DecayAni forKey:self.animateType];
+                    break;
+                default:
+                    break;
+            }
         }
-        
+       
         return self;
     };
     
@@ -823,6 +824,7 @@
 }
 
 #pragma mark 拓展方法
+
 -(void)initPBAnimate:(PBAnimationType)animationType{
     self.animationType=animationType;
     self.initSize=self.layer.frame;
@@ -870,17 +872,19 @@
 // */
 - (void)pop_animationDidStart:(POPAnimation *)anim{
      NSLog(@"pop_animationDidStart deldegate");
+    [self recoveryLayer];
 }
-//
-///**
-// @abstract Called when value meets or exceeds to value.
-// @param anim The relevant animation.
-// */
-//- (void)pop_animationDidReachToValue:(POPAnimation *)anim{
-//     NSLog(@"pop_animationDidReachToValue deldegate");
-//}
-//
-///**
+
+/**
+ @abstract Called when value meets or exceeds to value.
+ @param anim The relevant animation.
+ */
+- (void)pop_animationDidReachToValue:(POPAnimation *)anim{
+     NSLog(@"动画执行过程中");
+     NSLog(@"监听动画状态%@",[self.layer pop_animationForKey:self.animateType]);
+}
+
+/**
 // @abstract Called on animation stop.
 // @param anim The relevant animation.
 // @param finished Flag indicating finished state. Flag is true if the animation reached completion before being removed.
