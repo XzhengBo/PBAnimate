@@ -23,12 +23,14 @@
 @property(nonatomic)PBAnimationType animationType;
 @property(nonatomic)CGRect initSize;
 
+@property(nonatomic)BOOL isPlaying;
+
 @end
 
 @implementation PBAnimateView
 
 #pragma mark 动画属性
--(PBAnimateView *(^)(float vaule))Bounciness{
+-(PBAnimateView *(^)(float value))Bounciness{
     return ^(float vaule){
         if (vaule<20 && vaule>0 && self.animationType==SpringAnimation) {
             self.SpringAni.springBounciness = vaule;
@@ -39,7 +41,7 @@
         return self;
     };
 }
--(PBAnimateView *(^)(float vaule))Tension{
+-(PBAnimateView *(^)(float value))Tension{
     return ^(float vaule){
 
         if (vaule<20 && vaule>0 && self.animationType==SpringAnimation) {
@@ -52,7 +54,7 @@
     };
 }
 
--(PBAnimateView *(^)(float vaule))Friction{
+-(PBAnimateView *(^)(float value))Friction{
     return ^(float vaule){
         if (self.animationType==SpringAnimation) {
             self.SpringAni.dynamicsFriction = vaule;
@@ -61,13 +63,13 @@
     };
 }
 
--(PBAnimateView *(^)(float vaule))Mass{
+-(PBAnimateView *(^)(float value))Mass{
     return ^(float vaule){
         self.SpringAni.dynamicsMass = vaule;
         return self;
     };
 }
--(PBAnimateView *(^)(id vaule))To{
+-(PBAnimateView *(^)(id value))To{
     return ^(id vaule){
         switch (self.animationType) {
             case SpringAnimation:
@@ -84,7 +86,7 @@
     };
 }
 
--(PBAnimateView *(^)(id vaule))From{
+-(PBAnimateView *(^)(id value))From{
     return ^(id vaule){
         switch (self.animationType) {
             case SpringAnimation:
@@ -104,7 +106,7 @@
     };
 }
 
--(PBAnimateView *(^)(int vaule))RepeatCount{
+-(PBAnimateView *(^)(int value))RepeatCount{
     return ^(int vaule){
         switch (self.animationType) {
             case SpringAnimation:
@@ -124,7 +126,7 @@
         return self;
     };
 }
--(PBAnimateView *(^)(BOOL vaule))Autoreverses{
+-(PBAnimateView *(^)(BOOL value))Autoreverses{
     return ^(BOOL vaule){
         switch (self.animationType) {
             case SpringAnimation:
@@ -145,7 +147,7 @@
         return self;
     };
 }
--(PBAnimateView *(^)(BOOL vaule))Duration{
+-(PBAnimateView *(^)(BOOL value))Duration{
     return ^(BOOL vaule){
         switch (self.animationType) {
             case BasicAnimation:
@@ -158,7 +160,7 @@
         return self;
     };
 }
--(PBAnimateView *(^)(float vaule))Delay{
+-(PBAnimateView *(^)(float value))Delay{
     return ^(float vaule){
         switch (self.animationType) {
             case BasicAnimation:
@@ -172,7 +174,7 @@
     };
 }
 
--(PBAnimateView *(^)(BOOL vaule))repeatForever{
+-(PBAnimateView *(^)(BOOL value))repeatForever{
     return ^(BOOL vaule){
         switch (self.animationType) {
             case BasicAnimation:
@@ -186,7 +188,7 @@
     };
 }
 
--(PBAnimateView *(^)(BOOL vaule))removedOnCompletion{
+-(PBAnimateView *(^)(BOOL value))removedOnCompletion{
     return ^(BOOL vaule){
         switch (self.animationType) {
             case BasicAnimation:
@@ -489,7 +491,7 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:-300];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.y+200];
         self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
         self.animateType=@"FadeInDown";
         
@@ -506,7 +508,7 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:300];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.x-200];
         self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
         self.animateType=@"fadeInLeft";
         
@@ -523,7 +525,7 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:10];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.x+200];
         self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
         self.animateType=@"fadeInRight";
         
@@ -540,7 +542,7 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:300];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.y-200];
         self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
         self.animateType=@"fadeInUp";
     
@@ -569,8 +571,8 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:-300];
-        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.frame.origin.y+200];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
         self.animateType=@"fadeOutDown";
         
         [self initHelpPBAnimate:BasicAnimation];
@@ -586,8 +588,8 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:300];
-        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.frame.origin.x-200];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
         self.animateType=@"fadeOutLeft";
         
         [self initHelpPBAnimate:BasicAnimation];
@@ -603,8 +605,8 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:10];
-        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.window.bounds.size.width+self.frame.size.width];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
         self.animateType=@"fadeOutRight";
         
         [self initHelpPBAnimate:BasicAnimation];
@@ -620,8 +622,8 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:300];
-        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.frame.origin.y-200];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
         self.animateType=@"fadeOutUp";
         
         [self initHelpPBAnimate:BasicAnimation];
@@ -668,9 +670,17 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
-        self.BasicAni.toValue=@(M_PI);;
+        self.BasicAni.fromValue=@(-M_PI/2);;
+        self.BasicAni.toValue=@(0);;
+        self.layer.anchorPoint=CGPointMake(0, 1);;
+        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width/2), (self.frame.origin.y+self.frame.size.height/2), self.frame.size.width, self.frame.size.height);
         self.animateType=@"RoateInDownLeft";
-        
+        self.BasicAni.completionBlock= ^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+//                 self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+            }
+        };
+
         [self initHelpPBAnimate:BasicAnimation];
         self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
         self.HelpBasicAni.fromValue=@0;
@@ -680,10 +690,30 @@
     };
 }
 
+-(PBAnimateView *(^)(void))RoateInDownRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.fromValue=@(M_PI/2);;
+        self.BasicAni.toValue=@(0);;
+        self.layer.anchorPoint=CGPointMake(1, 1);;
+        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width/2), (self.frame.origin.y+self.frame.size.height/2), self.frame.size.width, self.frame.size.height);
+        self.animateType=@"RoateInDownRight";
+        
+//        [self initHelpPBAnimate:BasicAnimation];
+//        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+//        self.HelpBasicAni.fromValue=@0;
+//        self.HelpBasicAni.toValue=@1;
+//        self.HelpAnimateType=@"RoateInDownRight_help";
+        return self;
+    };
+}
+
 -(PBAnimateView *(^)(void))flipX{
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationX];
+        self.BasicAni.fromValue=@0;
         self.BasicAni.toValue=@(M_PI/2);;
         self.animateType=@"flipX";
         return self;
@@ -710,6 +740,7 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationY];
+        self.BasicAni.fromValue=@0;
         self.BasicAni.toValue=@(M_PI/2);;
         self.animateType=@"flipY";
         return self;
@@ -736,9 +767,86 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
-        self.BasicAni.fromValue=[NSNumber numberWithFloat:-300];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.y+200];
         self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
         self.animateType=@"slideInDown";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))slideInUp{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.y-200];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.animateType=@"slideInUp";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))slideInLeft{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.x-200];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.animateType=@"slideInLeft";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))slideInRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.x+200];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.animateType=@"slideInRight";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))slideOutUp{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.frame.origin.y-200];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.animateType=@"slideOutUp";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))slideOutDown{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.frame.origin.y+200];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        self.animateType=@"slideOutDown";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))slideOutRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.window.bounds.size.width+self.frame.size.width];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.animateType=@"slideOutRight";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))slideOutLeft{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+        self.BasicAni.toValue=[NSNumber numberWithFloat:self.frame.origin.x-200];
+        self.BasicAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        self.animateType=@"slideOutLeft";
         return self;
     };
 }
@@ -748,8 +856,9 @@
 -(PBAnimateView *(^)(void))Play{
     
     return ^(void){
+        
 //        NSLog(@"监听动画状态%@",[self.layer pop_animationForKey:self.animateType]);
-        if ([self.layer pop_animationForKey:self.animateType]==NULL) {
+        if (!self.isPlaying) {
             switch (self.animationType) {
                 case SpringAnimation:
                     [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
@@ -872,7 +981,8 @@
 // */
 - (void)pop_animationDidStart:(POPAnimation *)anim{
      NSLog(@"pop_animationDidStart deldegate");
-    [self recoveryLayer];
+    self.isPlaying=YES;
+    NSLog(@"动画是否在执行：%hhd",self.isPlaying);
 }
 
 /**
@@ -891,22 +1001,24 @@
 // */
 - (void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished{
     if (finished) {
-        
-        [self performSelector:@selector(recoveryLayer) withObject:nil afterDelay:0.5f];
+        self.isPlaying=NO;
+
+        [self performSelector:@selector(recoveryLayer) withObject:nil afterDelay:0.1f];
         
     }
 }
 
 -(void)recoveryLayer{
+   
     self.frame=self.initSize;
     self.layer.opacity=1;
-    
     self.BasicAni=nil;
     self.HelpBasicAni=nil;
     self.SpringAni=nil;
     self.HelpSpringAni=nil;
     self.DecayAni=nil;
-
+    
+    NSLog(@"动画是否在执行：%hhd",self.isPlaying);
     [self.layer removeAllAnimations];
 }
 //

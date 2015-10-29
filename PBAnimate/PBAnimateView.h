@@ -24,55 +24,55 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 /**
  *  设置反弹幅度
  */
-@property(nonatomic,readonly) PBAnimateView *(^Bounciness)(float vaule);
+@property(nonatomic,readonly) PBAnimateView *(^Bounciness)(float value);
 /**
  * Tension 拉力－影响回弹力度以及速度
  */
-@property(nonatomic,readonly) PBAnimateView *(^Tension)(float vaule);
+@property(nonatomic,readonly) PBAnimateView *(^Tension)(float value);
 /**
  *  Friction 摩擦力－如果开启，动画会不断重复，幅度逐渐削弱，直到停止
  */
-@property(nonatomic,readonly) PBAnimateView *(^Friction)(float vaule);
+@property(nonatomic,readonly) PBAnimateView *(^Friction)(float value);
 /**
  *  设置质量－细微的影响动画的回弹力度以及速度
  */
-@property(nonatomic,readonly) PBAnimateView *(^Mass)(float vaule);
+@property(nonatomic,readonly) PBAnimateView *(^Mass)(float value);
 /**
  *  设置POP动画放大Size
  */
-@property(nonatomic,readonly) PBAnimateView *(^PopScaleSize)(float vaule);
+@property(nonatomic,readonly) PBAnimateView *(^PopScaleSize)(float value);
 /**
  *  设置ToValue值
  */
-@property(nonatomic,readonly) PBAnimateView *(^To)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^To)(id value);
 /**
  *  设置FromValue值
  */
-@property(nonatomic,readonly) PBAnimateView *(^From)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^From)(id value);
 /**
  *  设置动画重复几次
  */
-@property(nonatomic,readonly) PBAnimateView *(^RepeatCount)(int vaule);
+@property(nonatomic,readonly) PBAnimateView *(^RepeatCount)(int value);
 /**
  *  设置是否自动恢复
  */
-@property(nonatomic,readonly) PBAnimateView *(^Autoreverses)(BOOL vaule);
+@property(nonatomic,readonly) PBAnimateView *(^Autoreverses)(BOOL value);
 /**
  *  设置动画持续时间
  */
-@property(nonatomic,readonly) PBAnimateView *(^Duration)(BOOL vaule);
+@property(nonatomic,readonly) PBAnimateView *(^Duration)(BOOL value);
 /**
  *  设置动画延迟
  */
-@property(nonatomic,readonly) PBAnimateView *(^Delay)(float vaule);
+@property(nonatomic,readonly) PBAnimateView *(^Delay)(float value);
 /**
  *  永远循环播放
  */
-@property(nonatomic,readonly) PBAnimateView *(^RepeatForever)(BOOL vaule);
+@property(nonatomic,readonly) PBAnimateView *(^RepeatForever)(BOOL value);
 /**
  *  播放完成移除
  */
-@property(nonatomic,readonly) PBAnimateView *(^removedOnCompletion)(BOOL vaule);
+@property(nonatomic,readonly) PBAnimateView *(^removedOnCompletion)(BOOL value);
 
 #pragma mark 封装时间函数
 @property(nonatomic,readonly) PBAnimateView *(^Linear)(void);
@@ -133,10 +133,10 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^slideInLeft)(void);
 @property(nonatomic,readonly) PBAnimateView *(^slideInUp)(void);
 #pragma mark SlideOut
-@property(nonatomic,readonly) PBAnimateView *(^slideOutDown)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^slideOutUp)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^slideOutRight)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^slideOutLeft)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^slideOutDown)(void);
+@property(nonatomic,readonly) PBAnimateView *(^slideOutUp)(void);
+@property(nonatomic,readonly) PBAnimateView *(^slideOutRight)(void);
+@property(nonatomic,readonly) PBAnimateView *(^slideOutLeft)(void);
 #pragma mark RoateIn
 @property(nonatomic,readonly) PBAnimateView *(^RoateIn)(void);
 @property(nonatomic,readonly) PBAnimateView *(^RoateInDownLeft)(void);
@@ -145,10 +145,10 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^RoateInUpLeft)(void);
 #pragma mark RoateOut
 @property(nonatomic,readonly) PBAnimateView *(^RoateOut)(void);
-@property(nonatomic,readonly) PBAnimateView *(^RoateOutDownLeft)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^RoateOutDownRight)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^RoateOutUpRight)(id vaule);
-@property(nonatomic,readonly) PBAnimateView *(^RoateOutUpLeft)(id vaule);
+@property(nonatomic,readonly) PBAnimateView *(^RoateOutDownLeft)();
+@property(nonatomic,readonly) PBAnimateView *(^RoateOutDownRight)(id value);
+@property(nonatomic,readonly) PBAnimateView *(^RoateOutUpRight)(id value);
+@property(nonatomic,readonly) PBAnimateView *(^RoateOutUpLeft)(id value);
 
 #pragma mark Flip
 @property(nonatomic,readonly) PBAnimateView *(^flipX)(void);
