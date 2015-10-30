@@ -8,6 +8,11 @@
 
 #import "UIView+PBAnimate.h"
 
+@interface UIView(PBAnimate)
+
+@property (nonatomic, assign) NSString* test;
+
+@end
 
 @implementation UIView(PBAnimate)
 
@@ -29,6 +34,7 @@
             anim.autoreverses=YES;
             anim.repeatForever=YES;
             [self pop_addAnimation:anim forKey:@"shake"];
+            NSLog(@"%@",self.test);
         }
         else{
             NSLog(@"%@", str);
