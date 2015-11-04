@@ -296,7 +296,6 @@
     
     if ([selectValue isEqualToString:@"RoateInDownRight"]) {
         self.DemoView.RoateInDownRight().Duration(1).Play();
-        
     }
     NSLog(@"%@",selectValue);
 

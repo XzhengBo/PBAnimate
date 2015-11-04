@@ -22,11 +22,8 @@
 
 @property(nonatomic)PBAnimationType animationType;
 @property(nonatomic)CGRect initSize;
-@property(nonatomic)CGPoint initPoint;
 
 @property(nonatomic)BOOL isPlaying;
-@property(nonatomic)BOOL needResetAnchorPoint;
-
 
 @end
 
@@ -644,15 +641,12 @@
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
         self.BasicAni.toValue=@(M_PI);;
         self.animateType=@"RoateIn";
-        self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+
         [self initHelpPBAnimate:BasicAnimation];
         self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
         self.HelpBasicAni.fromValue=@0;
         self.HelpBasicAni.toValue=@1;
         self.HelpAnimateType=@"RoateIn_help";
-        
-        self.needResetAnchorPoint=NO;
-        
         return self;
     };
 }
@@ -679,18 +673,21 @@
         self.BasicAni.fromValue=@(-M_PI/2);;
         self.BasicAni.toValue=@(0);;
         self.layer.anchorPoint=CGPointMake(0, 1);;
+        self.layer.position=CGPointMake(147, 91);
 //        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width/2), (self.frame.origin.y+self.frame.size.height/2), self.frame.size.width, self.frame.size.height);
-        self.layer.position=CGPointMake(self.initPoint.x-10, self.initPoint.y-10);
         self.animateType=@"RoateInDownLeft";
+        self.BasicAni.completionBlock= ^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                 self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                NSLog(@"RoateInDownLeft 完了");
+            }
+        };
 
         [self initHelpPBAnimate:BasicAnimation];
         self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
         self.HelpBasicAni.fromValue=@0;
         self.HelpBasicAni.toValue=@1;
         self.HelpAnimateType=@"RoateInDownLeft_help";
-        
-        self.needResetAnchorPoint=YES;
-        
         return self;
     };
 }
@@ -942,8 +939,6 @@
 -(void)initPBAnimate:(PBAnimationType)animationType{
     self.animationType=animationType;
     self.initSize=self.layer.frame;
-    self.initPoint=self.layer.position;
-    
     switch (animationType) {
         case BasicAnimation:
             self.BasicAni=[POPBasicAnimation animation];
@@ -1018,18 +1013,12 @@
 -(void)recoveryLayer{
    
     self.frame=self.initSize;
-    self.layer.position=self.initPoint;
-    
     self.layer.opacity=1;
     self.BasicAni=nil;
     self.HelpBasicAni=nil;
     self.SpringAni=nil;
     self.HelpSpringAni=nil;
     self.DecayAni=nil;
-    
-    if (self.needResetAnchorPoint) {
-        self.layer.anchorPoint=CGPointMake(0.5, 0.5);
-    }
     
     NSLog(@"动画是否在执行：%hhd",self.isPlaying);
     [self.layer removeAllAnimations];
@@ -1043,6 +1032,27 @@
 //     NSLog(@"pop_animationDidApply deldegate");
 //}
 
+-(void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view
+{
+    CGPoint newPoint = CGPointMake(view.bounds.size.width * anchorPoint.x,
+                                   view.bounds.size.height * anchorPoint.y);
+    CGPoint oldPoint = CGPointMake(view.bounds.size.width * view.layer.anchorPoint.x,
+                                   view.bounds.size.height * view.layer.anchorPoint.y);
+    
+    newPoint = CGPointApplyAffineTransform(newPoint, view.transform);
+    oldPoint = CGPointApplyAffineTransform(oldPoint, view.transform);
+    
+    CGPoint position = view.layer.position;
+    
+    position.x -= oldPoint.x;
+    position.x += newPoint.x;
+    
+    position.y -= oldPoint.y;
+    position.y += newPoint.y;
+    
+    view.layer.position = position;
+    view.layer.anchorPoint = anchorPoint;
+}
 
 @end
 
