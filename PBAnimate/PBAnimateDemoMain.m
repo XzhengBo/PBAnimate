@@ -168,68 +168,16 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *selectValue=[[self.DemoDataList objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-//    if ([selectValue isEqualToString:@"shake"]) {
-////        self.DemoView.Shake(nil).Play();
-//        [self.DemoView PBAnimateEndCallback:^() {
-//                NSLog(@"动完了");
-//        }];
-//        
-//    }
-//    if ([selectValue isEqualToString:@"pop"]) {
-//        self.DemoView.Pop(nil).Play();
-//    }
-//    if ([selectValue isEqualToString:@"bounce"]) {
-//        id toValue =[NSValue valueWithCGPoint:CGPointMake((0), 0)];
-//        self.DemoView.Bounce(toValue).Bounciness(4).Autoreverses(NO).Play();
-//
-//        [self.DemoView PBAnimateStartCallback:^{
-//            NSLog(@"bounce 动画开始");
-//        }];
-//        
-//        [self.DemoView PBAnimateEndCallback:^() {
-//            NSLog(@"bounce 动画结束");
-//        }];
-//        
-//    }
-//    if ([selectValue isEqualToString:@"flash"]) {
-//        self.DemoView.Flash(nil).Play();
-//    }
-//    if ([selectValue isEqualToString:@"pulse"]) {
-//        id toValue =[NSValue valueWithCGSize:CGSizeMake(200, 200)];
-//        self.DemoView.Pulse(toValue).Play();
-//    }
-//    if ([selectValue isEqualToString:@"rubberBand"]) {
-//        self.DemoView.Rubber(nil).Play();
-//        
-//    }
-//    if ([selectValue isEqualToString:@"swing"]) {
-//        self.DemoView.Swing(nil).Play();
-//        [self.DemoView PBAnimateEndCallback:^() {
-//            NSLog(@"swing finish");
-//        }];
-//       
-//    }
-//    
-//    if ([selectValue isEqualToString:@"tada"]) {
-//        id fromVal=[UIColor blueColor];
-//        id toVal=[UIColor grayColor];
-//        self.DemoView.Pop(nil).Play();
-//        
-//    }
-//    
-//    if ([selectValue isEqualToString:@"countdown"]) {
-//       
-////        self.DemoView.CountDown(nil).Play();
-//    }
+
     
     if ([selectValue isEqualToString:@"fadeIn"]) {
         self.DemoView.fadeIn().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeInDown"]) {
-        self.DemoView.fadeInDown().Duration(1).Play();
+        self.DemoView.fadeInDown().Duration(10).Play();
     }
     if ([selectValue isEqualToString:@"fadeInUp"]) {
-        self.DemoView.fadeInUp().Duration(1).Play();
+        self.DemoView.fadeInUp().Duration(10).Play();
     }
     if ([selectValue isEqualToString:@"fadeInRight"]) {
         self.DemoView.fadeInRight().Duration(1).Play();
@@ -238,9 +186,6 @@
         self.DemoView.fadeInLeft().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeOut"]) {
-//        id fromVal=[NSNumber numberWithFloat:0.5];
-//        id toVal=[NSNumber numberWithFloat:0.2];
-//        self.DemoView.fadeOut().Duration(1).To(toVal).From(fromVal).Play();
         self.DemoView.fadeOut().Play();
     }
     if ([selectValue isEqualToString:@"fadeOutDown"]) {
@@ -342,8 +287,6 @@
     self.SlideOut=[[NSArray alloc]initWithObjects:@"slideOutDown",@"slideOutUp",@"slideOutRight",@"slideOutLeft", nil];
     self.Flip=[[NSArray alloc]initWithObjects:@"flipX",@"flipY", @"flipXOut",@"flipYOut",nil];
     self.DemoDataList=[[NSMutableArray alloc]initWithObjects:self.FadeIn,self.FadeOut,self.RoateIn,self.RoateOut,self.SlideIn,self.SlideOut,self.Flip,nil];
-    
-//    self.DemoDataList=[[NSArray alloc]initWithObjects:@"slideInDown",@"flash",@"pulse",@"rubberBand",@"shake",@"swing",@"tada",@"countdown",@"fadeIn",@"fadeInDown",nil];
     
 }
 #pragma mark -- 事件
