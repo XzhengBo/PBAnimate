@@ -145,10 +145,10 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) PBAnimateView *(^RoateInUpLeft)(void);
 #pragma mark RoateOut
 @property(nonatomic,readonly) PBAnimateView *(^RoateOut)(void);
-@property(nonatomic,readonly) PBAnimateView *(^RoateOutDownLeft)();
-@property(nonatomic,readonly) PBAnimateView *(^RoateOutDownRight)(id value);
-@property(nonatomic,readonly) PBAnimateView *(^RoateOutUpRight)(id value);
-@property(nonatomic,readonly) PBAnimateView *(^RoateOutUpLeft)(id value);
+@property(nonatomic,readonly) PBAnimateView *(^RoateOutDownLeft)(void);
+@property(nonatomic,readonly) PBAnimateView *(^RoateOutDownRight)(void);
+@property(nonatomic,readonly) PBAnimateView *(^RoateOutUpRight)(void);
+@property(nonatomic,readonly) PBAnimateView *(^RoateOutUpLeft)(void);
 
 #pragma mark Flip
 @property(nonatomic,readonly) PBAnimateView *(^flipX)(void);

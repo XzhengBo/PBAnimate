@@ -297,6 +297,27 @@
     if ([selectValue isEqualToString:@"RoateInDownRight"]) {
         self.DemoView.RoateInDownRight().Duration(1).Play();
     }
+    
+    if ([selectValue isEqualToString:@"RoateInUpRight"]) {
+        self.DemoView.RoateInUpRight().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"RoateInUpLeft"]) {
+        self.DemoView.RoateInUpLeft().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"RoateOutDownLeft"]) {
+        self.DemoView.RoateOutDownLeft().Duration(1).Play();
+    }
+    
+    if ([selectValue isEqualToString:@"RoateOutDownRight"]) {
+        self.DemoView.RoateOutDownRight().Duration(1).Play();
+    }
+    
+    if ([selectValue isEqualToString:@"RoateOutUpRight"]) {
+        self.DemoView.RoateOutUpRight().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"RoateOutUpLeft"]) {
+        self.DemoView.RoateOutUpLeft().Duration(1).Play();
+    }
     NSLog(@"%@",selectValue);
 
 }

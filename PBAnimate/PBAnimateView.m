@@ -22,7 +22,7 @@
 
 @property(nonatomic)PBAnimationType animationType;
 @property(nonatomic)CGRect initSize;
-
+@property(nonatomic)BOOL needrecoveryFrame;
 @property(nonatomic)BOOL isPlaying;
 
 @end
@@ -641,7 +641,14 @@
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
         self.BasicAni.toValue=@(M_PI);;
         self.animateType=@"RoateIn";
-
+        self.needrecoveryFrame=NO;
+        self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                self.frame=self.initSize;
+            }
+        };
+        
         [self initHelpPBAnimate:BasicAnimation];
         self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
         self.HelpBasicAni.fromValue=@0;
@@ -651,6 +658,112 @@
     };
 }
 
+
+-(PBAnimateView *(^)(void))RoateInDownLeft{
+    return ^(void){
+        
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.fromValue=@(-M_PI/2);;
+        self.BasicAni.toValue=@(0);
+        self.needrecoveryFrame=NO;
+        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0, 1);
+        self.animateType=@"RoateInDownLeft";
+        
+        self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+            }
+        };
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"RoateInDownLeft_help";
+        
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))RoateInDownRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.fromValue=@(M_PI/2);;
+        self.BasicAni.toValue=@(0);;
+        self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(1, 1);;
+        self.animateType=@"RoateInDownRight";
+        self.needrecoveryFrame=NO;
+        self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+            }
+        };
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"RoateInDownRight_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))RoateInUpLeft{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.fromValue=@(-M_PI/2);
+        self.BasicAni.toValue=@(0);
+        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0, 0);;
+        self.animateType=@"RoateInUpLeft";
+        self.needrecoveryFrame=NO;
+        self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+            }
+        };
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"RoateInUpLeft_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))RoateInUpRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.fromValue=@(M_PI/2);
+        self.BasicAni.toValue=@(0);
+        self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(1, 0);;
+        self.animateType=@"RoateInUpRight";
+        self.needrecoveryFrame=NO;
+        self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+            }
+        };
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@0;
+        self.HelpBasicAni.toValue=@1;
+        self.HelpAnimateType=@"RoateInUpRight_help";
+        return self;
+    };
+}
 -(PBAnimateView *(^)(void))RoateOut{
     return ^(void){
         [self initPBAnimate:BasicAnimation];
@@ -666,47 +779,108 @@
         return self;
     };
 }
--(PBAnimateView *(^)(void))RoateInDownLeft{
+-(PBAnimateView *(^)(void))RoateOutDownLeft{
     return ^(void){
+        
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
         self.BasicAni.fromValue=@(-M_PI/2);;
-        self.BasicAni.toValue=@(0);;
-        self.layer.anchorPoint=CGPointMake(0, 1);;
-        self.layer.position=CGPointMake(147, 91);
-//        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width/2), (self.frame.origin.y+self.frame.size.height/2), self.frame.size.width, self.frame.size.height);
-        self.animateType=@"RoateInDownLeft";
-        self.BasicAni.completionBlock= ^(POPAnimation *anim, BOOL finished) {
+        self.BasicAni.toValue=@(0);
+        self.needrecoveryFrame=NO;
+        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0, 1);
+        self.animateType=@"RoateOutDownLeft";
+        
+        self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
             if (finished) {
-                 self.layer.anchorPoint=CGPointMake(0.5, 0.5);
-                NSLog(@"RoateInDownLeft 完了");
+                self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
             }
         };
-
+        
         [self initHelpPBAnimate:BasicAnimation];
         self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
-        self.HelpBasicAni.fromValue=@0;
-        self.HelpBasicAni.toValue=@1;
-        self.HelpAnimateType=@"RoateInDownLeft_help";
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"RoateOutDownLeft_help";
+        
         return self;
     };
 }
 
--(PBAnimateView *(^)(void))RoateInDownRight{
+-(PBAnimateView *(^)(void))RoateOutDownRight{
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
         self.BasicAni.fromValue=@(M_PI/2);;
         self.BasicAni.toValue=@(0);;
+        self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
         self.layer.anchorPoint=CGPointMake(1, 1);;
-        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width/2), (self.frame.origin.y+self.frame.size.height/2), self.frame.size.width, self.frame.size.height);
-        self.animateType=@"RoateInDownRight";
+        self.animateType=@"RoateOutDownRight";
+        self.needrecoveryFrame=NO;
+        self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+            }
+        };
         
-//        [self initHelpPBAnimate:BasicAnimation];
-//        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
-//        self.HelpBasicAni.fromValue=@0;
-//        self.HelpBasicAni.toValue=@1;
-//        self.HelpAnimateType=@"RoateInDownRight_help";
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"RoateOutDownRight_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))RoateOutUpLeft{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.fromValue=@(-M_PI/2);
+        self.BasicAni.toValue=@(0);
+        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0, 0);;
+        self.animateType=@"RoateOutUpLeft";
+        self.needrecoveryFrame=NO;
+        self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+            }
+        };
+        
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"RoateOutUpLeft_help";
+        return self;
+    };
+}
+
+-(PBAnimateView *(^)(void))RoateOutUpRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
+        self.BasicAni.fromValue=@(M_PI/2);
+        self.BasicAni.toValue=@(0);
+        self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(1, 0);;
+        self.animateType=@"RoateOutUpRight";
+        self.needrecoveryFrame=NO;
+        self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
+            if (finished) {
+                self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+                self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+            }
+        };
+        [self initHelpPBAnimate:BasicAnimation];
+        self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+        self.HelpBasicAni.fromValue=@1;
+        self.HelpBasicAni.toValue=@0;
+        self.HelpAnimateType=@"RoateOutUpRight_help";
         return self;
     };
 }
@@ -859,7 +1033,6 @@
     
     return ^(void){
         
-//        NSLog(@"监听动画状态%@",[self.layer pop_animationForKey:self.animateType]);
         if (!self.isPlaying) {
             switch (self.animationType) {
                 case SpringAnimation:
@@ -938,7 +1111,8 @@
 
 -(void)initPBAnimate:(PBAnimationType)animationType{
     self.animationType=animationType;
-    self.initSize=self.layer.frame;
+    self.initSize=self.frame;
+    self.needrecoveryFrame=YES;
     switch (animationType) {
         case BasicAnimation:
             self.BasicAni=[POPBasicAnimation animation];
@@ -958,7 +1132,7 @@
 
 -(void)initHelpPBAnimate:(PBAnimationType)animationType{
     self.animationType=animationType;
-    self.initSize=self.layer.frame;
+    self.initSize=self.frame;
     switch (animationType) {
         case BasicAnimation:
             self.HelpBasicAni=[POPBasicAnimation animation];
@@ -1005,14 +1179,15 @@
     if (finished) {
         self.isPlaying=NO;
         [self recoveryLayer];
-//        [self performSelector:@selector(recoveryLayer) withObject:nil afterDelay:0.1f];
         
     }
 }
 
 -(void)recoveryLayer{
-   
-    self.frame=self.initSize;
+    if (self.needrecoveryFrame) {
+        self.layer.anchorPoint=CGPointMake(0.5, 0.5);
+        self.frame=self.initSize;
+    }
     self.layer.opacity=1;
     self.BasicAni=nil;
     self.HelpBasicAni=nil;
@@ -1022,36 +1197,6 @@
     
     NSLog(@"动画是否在执行：%hhd",self.isPlaying);
     [self.layer removeAllAnimations];
-}
-//
-///**
-// @abstract Called each frame animation is applied.
-// @param anim The relevant animation.
-// */
-//- (void)pop_animationDidApply:(POPAnimation *)anim{
-//     NSLog(@"pop_animationDidApply deldegate");
-//}
-
--(void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view
-{
-    CGPoint newPoint = CGPointMake(view.bounds.size.width * anchorPoint.x,
-                                   view.bounds.size.height * anchorPoint.y);
-    CGPoint oldPoint = CGPointMake(view.bounds.size.width * view.layer.anchorPoint.x,
-                                   view.bounds.size.height * view.layer.anchorPoint.y);
-    
-    newPoint = CGPointApplyAffineTransform(newPoint, view.transform);
-    oldPoint = CGPointApplyAffineTransform(oldPoint, view.transform);
-    
-    CGPoint position = view.layer.position;
-    
-    position.x -= oldPoint.x;
-    position.x += newPoint.x;
-    
-    position.y -= oldPoint.y;
-    position.y += newPoint.y;
-    
-    view.layer.position = position;
-    view.layer.anchorPoint = anchorPoint;
 }
 
 @end
