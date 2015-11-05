@@ -22,6 +22,7 @@
 
 @property(nonatomic)UITableView *DemoTableView;
 @property(nonatomic)UIView *DemoContentView;
+@property(nonatomic)UILabel *DemoLabel;
 @property(nonatomic)PBAnimateView *DemoView;
 @end
 
@@ -56,6 +57,11 @@
     [self.DemoContentView addSubview:self.DemoView];
     [self.view addSubview:self.DemoTableView];
     
+    self.DemoLabel=[[UILabel alloc]init];
+    self.DemoLabel.text=@"动起来";
+    self.DemoLabel.textColor=[UIColor whiteColor];
+    [self.DemoView addSubview:self.DemoLabel];
+    
 //     UIBarButtonItem *StopAnimate=[[UIBarButtonItem alloc]initWithTitle:@"停止" style:UIBarButtonItemStylePlain target:self action:@selector(StopAnimate)];
 //    [self.navigationItem setRightBarButtonItem:StopAnimate];
     
@@ -81,6 +87,10 @@
        
     }];
    
+    [self.DemoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.DemoView);
+        
+    }];
     
 }
 
@@ -316,7 +326,7 @@
         self.DemoView.RoateOutUpRight().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"RoateOutUpLeft"]) {
-        self.DemoView.RoateOutUpLeft().Duration(1).Play();
+        self.DemoView.RoateInUpLeft().Duration(1).Play();
     }
     NSLog(@"%@",selectValue);
 

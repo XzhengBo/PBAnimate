@@ -14,7 +14,7 @@
 #undef __state
 #define __state ((POPBasicAnimationState *)_state)
 
-#pragma mark - Lifecycle
+#pragma mark - Lifecycle 
 
 + (instancetype)animation
 {

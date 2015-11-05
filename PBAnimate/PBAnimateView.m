@@ -639,7 +639,7 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
-        self.BasicAni.toValue=@(M_PI);;
+        self.BasicAni.toValue=@(M_PI*2);;
         self.animateType=@"RoateIn";
         self.needrecoveryFrame=NO;
         self.BasicAni.completionBlock=^(POPAnimation *anim, BOOL finished) {
@@ -768,7 +768,7 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotation];
-        self.BasicAni.toValue=@(M_PI);;
+        self.BasicAni.toValue=@(M_PI*2);;
         self.animateType=@"RoateOut";
         
         [self initHelpPBAnimate:BasicAnimation];
@@ -890,7 +890,7 @@
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationX];
         self.BasicAni.fromValue=@0;
-        self.BasicAni.toValue=@(M_PI/2);;
+        self.BasicAni.toValue=@(M_PI/2);
         self.animateType=@"flipX";
         return self;
     };
@@ -900,7 +900,9 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationX];
+        self.BasicAni.fromValue=@0;
         self.BasicAni.toValue=@(M_PI/2);;
+        
         self.animateType=@"flipXOut";
         
         [self initHelpPBAnimate:BasicAnimation];
@@ -917,7 +919,8 @@
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationY];
         self.BasicAni.fromValue=@0;
-        self.BasicAni.toValue=@(M_PI/2);;
+        self.BasicAni.toValue=@(M_PI/2.0000001);  //pop库的一个Bug https://github.com/facebook/pop/issues/71
+        self.needrecoveryFrame=NO;
         self.animateType=@"flipY";
         return self;
     };
@@ -927,7 +930,9 @@
     return ^(void){
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationY];
-        self.BasicAni.toValue=@(M_PI/2);;
+        self.BasicAni.fromValue=@0;
+        self.BasicAni.toValue=@(M_PI/2.0000001);  //pop库的一个Bug https://github.com/facebook/pop/issues/71
+        self.needrecoveryFrame=NO;
         self.animateType=@"flipYOut";
         
         [self initHelpPBAnimate:BasicAnimation];
