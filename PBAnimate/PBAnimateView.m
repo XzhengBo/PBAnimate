@@ -919,7 +919,7 @@
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationY];
         self.BasicAni.fromValue=@0;
-        self.BasicAni.toValue=@(M_PI/2.0000001);  //pop库的一个Bug https://github.com/facebook/pop/issues/71
+        self.BasicAni.toValue=@(M_PI/2.0001);  //pop库的一个Bug https://github.com/facebook/pop/issues/71
         self.needrecoveryFrame=NO;
         self.animateType=@"flipY";
         return self;
@@ -931,7 +931,7 @@
         [self initPBAnimate:BasicAnimation];
         self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerRotationY];
         self.BasicAni.fromValue=@0;
-        self.BasicAni.toValue=@(M_PI/2.0000001);  //pop库的一个Bug https://github.com/facebook/pop/issues/71
+        self.BasicAni.toValue=@(M_PI/2.0001);  //pop库的一个Bug https://github.com/facebook/pop/issues/71
         self.needrecoveryFrame=NO;
         self.animateType=@"flipYOut";
         
