@@ -202,7 +202,7 @@
         self.DemoView.fadeOutDown().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeOutLeft"]) {
-        self.DemoView.fadeOutLeft().Duration(1).Bounce(20).Play();
+        self.DemoView.fadeOutLeft().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeOutRight"]) {
         self.DemoView.fadeOutRight().Duration(1).Play();
