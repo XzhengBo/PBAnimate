@@ -57,6 +57,7 @@
 		F66F43B21BCF840D00B1A5DC /* PBAnimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAnimate.h; sourceTree = "<group>"; };
 		F66F43B51BCF8A0800B1A5DC /* UIView+PBAnimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PBAnimate.h"; sourceTree = "<group>"; };
 		F66F43B61BCF8A0800B1A5DC /* UIView+PBAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PBAnimate.m"; sourceTree = "<group>"; };
+		F68D312B1BECB3A400DFD3D4 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +143,7 @@
 		F64BA1301BCE43A10028E697 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F68D312B1BECB3A400DFD3D4 /* Reveal.framework */,
 				F64BA1311BCE43A10028E697 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -522,6 +524,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PBAnimate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"Masonry\"",
+					"-l\"c++\"",
+					"-l\"pop\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wecall.PBAnimate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -534,6 +547,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PBAnimate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"Masonry\"",
+					"-l\"c++\"",
+					"-l\"pop\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wecall.PBAnimate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

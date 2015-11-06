@@ -19,6 +19,8 @@
 @property(nonatomic)NSArray *RoateIn;
 @property(nonatomic)NSArray *RoateOut;
 @property(nonatomic)NSArray *Flip;
+@property(nonatomic)NSArray *ZoomIn;
+@property(nonatomic)NSArray *ZoomOut;
 
 @property(nonatomic)UITableView *DemoTableView;
 @property(nonatomic)UIView *DemoContentView;
@@ -49,7 +51,6 @@
     
     self.DemoView=[[UIView alloc]init];
     self.DemoView.backgroundColor=[UIColor colorWithRed:117.0/255.0 green:101.0/255.0 blue:239.0/255.0 alpha:1];
-//    self.DemoView.layer.cornerRadius=40;
     self.DemoView.layer.masksToBounds=YES;
     self.DemoContentView=[[UIView alloc]init];
     
@@ -58,12 +59,10 @@
     [self.view addSubview:self.DemoTableView];
     
     self.DemoLabel=[[UILabel alloc]init];
-    self.DemoLabel.text=@"动起来";
+    self.DemoLabel.text=@"PaGeek";
     self.DemoLabel.textColor=[UIColor whiteColor];
     [self.DemoView addSubview:self.DemoLabel];
-    
-//     UIBarButtonItem *StopAnimate=[[UIBarButtonItem alloc]initWithTitle:@"停止" style:UIBarButtonItemStylePlain target:self action:@selector(StopAnimate)];
-//    [self.navigationItem setRightBarButtonItem:StopAnimate];
+
     
     [self.DemoContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(64);
@@ -125,6 +124,12 @@
         case 6:
             return @"Filp";
             break;
+        case 7:
+            return @"ZoomIn";
+            break;
+        case 8:
+            return @"ZoomOut";
+            break;
         default:
             return @"";
             break;
@@ -159,6 +164,11 @@
         case 6:
             cell.textLabel.text=self.Flip[indexPath.row];
             break;
+        case 7:
+            cell.textLabel.text=self.ZoomIn[indexPath.row];
+            break;
+        case 8:
+            cell.textLabel.text=self.ZoomOut[indexPath.row];
         default:
             break;
     }
@@ -174,10 +184,10 @@
         self.DemoView.fadeIn().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeInDown"]) {
-        self.DemoView.fadeInDown().Duration(10).Play();
+        self.DemoView.fadeInDown().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeInUp"]) {
-        self.DemoView.fadeInUp().Duration(10).Play();
+        self.DemoView.fadeInUp().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeInRight"]) {
         self.DemoView.fadeInRight().Duration(1).Play();
@@ -192,7 +202,7 @@
         self.DemoView.fadeOutDown().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"fadeOutLeft"]) {
-        self.DemoView.fadeOutLeft().Duration(1).Play();
+        self.DemoView.fadeOutLeft().Duration(1).Bounce(20).Play();
     }
     if ([selectValue isEqualToString:@"fadeOutRight"]) {
         self.DemoView.fadeOutRight().Duration(1).Play();
@@ -201,9 +211,6 @@
         self.DemoView.fadeOutUp().Duration(1).Play();
     }
     
-    if ([selectValue isEqualToString:@"slideInDown"]) {
-        self.DemoView.slideInDown().Duration(1).Play();
-    }
     if ([selectValue isEqualToString:@"RoateIn"]) {
         self.DemoView.RoateIn().Duration(1).Play();
     }
@@ -223,14 +230,18 @@
     if ([selectValue isEqualToString:@"RoateOut"]) {
         self.DemoView.RoateOut().Duration(1).Play();
     }
+    if ([selectValue isEqualToString:@"slideInDown"]) {
+        self.DemoView.slideInDown().Duration(1).Bounce(20.f).Play();
+    }
+    
     if ([selectValue isEqualToString:@"slideInRight"]) {
-        self.DemoView.slideInRight().Duration(1).Play();
+        self.DemoView.slideInRight().Duration(1).Bounce(20.f).Play();
     }
     if ([selectValue isEqualToString:@"slideInLeft"]) {
-        self.DemoView.slideInLeft().Duration(1).Play();
+        self.DemoView.slideInLeft().Duration(1).Bounce(10.f).Play();
     }
     if ([selectValue isEqualToString:@"slideInUp"]) {
-        self.DemoView.slideInUp().Duration(1).Play();
+        self.DemoView.slideInUp().Duration(1).Bounce(10.f).Play();
     }
     if ([selectValue isEqualToString:@"slideOutDown"]) {
         self.DemoView.slideOutDown().Duration(1).Play();
@@ -273,6 +284,36 @@
     if ([selectValue isEqualToString:@"RoateOutUpLeft"]) {
         self.DemoView.RoateInUpLeft().Duration(1).Play();
     }
+    if ([selectValue isEqualToString:@"ZoomIn"]) {
+        self.DemoView.ZoomIn().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"ZoomInUp"]) {
+        self.DemoView.ZoomInUp().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"ZoomInDown"]) {
+        self.DemoView.ZoomInDown().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"ZoomInRight"]) {
+        self.DemoView.ZoomInRight().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"ZoomInLeft"]) {
+        self.DemoView.ZoomInLeft().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"ZoomOut"]) {
+        self.DemoView.ZoomOut().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"ZoomOutUp"]) {
+        self.DemoView.ZoomOutUp().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"ZoomOutDown"]) {
+        self.DemoView.ZoomOutDown().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"ZoomOutRight"]) {
+        self.DemoView.ZoomOutRight().Duration(1).Play();
+    }
+    if ([selectValue isEqualToString:@"ZoomOutLeft"]) {
+        self.DemoView.ZoomOutLeft().Duration(1).Play();
+    }
     NSLog(@"%@",selectValue);
 
 }
@@ -286,7 +327,9 @@
     self.SlideIn=[[NSArray alloc]initWithObjects:@"slideInDown",@"slideInRight",@"slideInLeft",@"slideInUp", nil];
     self.SlideOut=[[NSArray alloc]initWithObjects:@"slideOutDown",@"slideOutUp",@"slideOutRight",@"slideOutLeft", nil];
     self.Flip=[[NSArray alloc]initWithObjects:@"flipX",@"flipY", @"flipXOut",@"flipYOut",nil];
-    self.DemoDataList=[[NSMutableArray alloc]initWithObjects:self.FadeIn,self.FadeOut,self.RoateIn,self.RoateOut,self.SlideIn,self.SlideOut,self.Flip,nil];
+    self.ZoomIn=[[NSArray alloc]initWithObjects:@"ZoomIn",@"ZoomInUp",@"ZoomInDown", @"ZoomInRight",@"ZoomInLeft",nil];
+    self.ZoomOut=[[NSArray alloc]initWithObjects:@"ZoomOut",@"ZoomOutUp",@"ZoomOutDown", @"ZoomOutRight",@"ZoomOutLeft",nil];
+    self.DemoDataList=[[NSMutableArray alloc]initWithObjects:self.FadeIn,self.FadeOut,self.RoateIn,self.RoateOut,self.SlideIn,self.SlideOut,self.Flip,self.ZoomIn,self.ZoomOut,nil];
     
 }
 #pragma mark -- 事件

@@ -21,10 +21,6 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 
 #pragma mark 动画属性设置
 /**
- *  设置反弹幅度
- */
-@property(nonatomic,readonly) UIView *(^Bounciness)(float value);
-/**
  * Tension 拉力－影响回弹力度以及速度
  */
 @property(nonatomic,readonly) UIView *(^Tension)(float value);
@@ -78,7 +74,7 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) UIView *(^EaseIn)(void);
 @property(nonatomic,readonly) UIView *(^EaseOut)(void);
 @property(nonatomic,readonly) UIView *(^EaseInEaseOut)(void);
-@property(nonatomic,readonly) UIView *(^Bounce)(void);
+@property(nonatomic,readonly) UIView *(^Bounce)(float value);
 
 
 #pragma mark 封装基础动画
@@ -122,9 +118,19 @@ typedef NS_ENUM(NSInteger,PBAnimationType) {
 @property(nonatomic,readonly) UIView *(^flipY)(void);
 @property(nonatomic,readonly) UIView *(^flipXOut)(void);
 @property(nonatomic,readonly) UIView *(^flipYOut)(void);
-#pragma mark Bounce
 
+#pragma mark Zoom
+@property(nonatomic,readonly) UIView *(^ZoomIn)(void);
+@property(nonatomic,readonly) UIView *(^ZoomInDown)(void);
+@property(nonatomic,readonly) UIView *(^ZoomInUp)(void);
+@property(nonatomic,readonly) UIView *(^ZoomInLeft)(void);
+@property(nonatomic,readonly) UIView *(^ZoomInRight)(void);
 
+@property(nonatomic,readonly) UIView *(^ZoomOut)(void);
+@property(nonatomic,readonly) UIView *(^ZoomOutDown)(void);
+@property(nonatomic,readonly) UIView *(^ZoomOutUp)(void);
+@property(nonatomic,readonly) UIView *(^ZoomOutLeft)(void);
+@property(nonatomic,readonly) UIView *(^ZoomOutRight)(void);
 #pragma mark 动画事件
 /**
  *  是否开始动画，参数YES/NO

@@ -43,17 +43,7 @@ BOOL isPlaying_tmp;
 @implementation UIView(PBAnimate)
 
 #pragma mark 动画属性
--(UIView *(^)(float value))Bounciness{
-    return ^(float vaule){
-        if (vaule<20 && vaule>0 && self.animationType==SpringAnimation) {
-            self.SpringAni.springBounciness = vaule;
-        }
-        else{
-            self.SpringAni.springBounciness = 4;
-        }
-        return self;
-    };
-}
+
 -(UIView *(^)(float value))Tension{
     return ^(float vaule){
         
@@ -271,34 +261,60 @@ BOOL isPlaying_tmp;
         return self;
     };
 }
-
--(UIView *(^)(void))Bounce{
-    return ^(void){
-        
-        if ([self.animateType isEqualToString:@"fadeOutLeft"]) {
-            
-            [self initPBAnimate:SpringAnimation];
-            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
-            self.SpringAni.fromValue=[NSNumber numberWithFloat:300];
-            self.SpringAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
-            self.animateType=@"fadeOutLeft_Bounce";
-            
-            [self initHelpPBAnimate:BasicAnimation];
-            self.HelpBasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
-            self.HelpBasicAni.fromValue=@1;
-            self.HelpBasicAni.toValue=@0;
-            self.HelpAnimateType=@"fadeOutLeft_help_Bounce";
-            NSLog(@"是fadeOutLeft");
-        }
-        
+//TODO: Bounce完善
+-(UIView *(^)(float value))Bounce{
+  
+    return ^(float vaule){
+        [self initPBAnimate:SpringAnimation];
+//!!!: SlideIn
         if ([self.animateType isEqualToString:@"slideInDown"]) {
-            [self initPBAnimate:SpringAnimation];
             self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
             self.SpringAni.fromValue=[NSNumber numberWithFloat:-300];
             self.SpringAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
-            self.animateType=@"slideInDown";
-            NSLog(@"slideInDown");
+      
         }
+        if ([self.animateType isEqualToString:@"slideInUp"]){
+            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+            self.SpringAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.y-200];
+            self.SpringAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+
+        }
+        if ([self.animateType isEqualToString:@"slideInLeft"]){
+
+            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+            self.SpringAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.x-200];
+            self.SpringAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+     
+        }
+        if ([self.animateType isEqualToString:@"slideInRight"]){
+            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+            self.SpringAni.fromValue=[NSNumber numberWithFloat:self.frame.origin.x+200];
+            self.SpringAni.toValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+
+        }
+//!!!: SlideOut
+        if ([self.animateType isEqualToString:@"slideOutDown"]) {
+            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+            self.SpringAni.toValue=[NSNumber numberWithFloat:self.frame.origin.y+200];
+            self.SpringAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        }
+        if ([self.animateType isEqualToString:@"slideOutUp"]) {
+            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+            self.SpringAni.toValue=[NSNumber numberWithFloat:self.frame.origin.y-200];
+            self.SpringAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.y+self.initSize.size.height/2];
+        }
+        if ([self.animateType isEqualToString:@"slideOutRight"]) {
+            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+            self.SpringAni.toValue=[NSNumber numberWithFloat:self.window.bounds.size.width+self.frame.size.width];
+            self.SpringAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+        }
+        if ([self.animateType isEqualToString:@"slideOutLeft"]) {
+            self.SpringAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+            self.SpringAni.toValue=[NSNumber numberWithFloat:self.frame.origin.x-200];
+            self.SpringAni.fromValue=[NSNumber numberWithFloat:self.initSize.origin.x+self.initSize.size.width/2];
+            
+        }
+        self.SpringAni.springBounciness = vaule;
         return self;
     };
 }
@@ -860,18 +876,135 @@ BOOL isPlaying_tmp;
     };
 }
 
+
+-(UIView *(^)(void))ZoomIn{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomIn";
+        return self;
+    };
+}
+
+-(UIView *(^)(void))ZoomInDown{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.frame=CGRectMake((self.frame.origin.x), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0.5, 0);;
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomInDown";
+        return self;
+    };
+}
+-(UIView *(^)(void))ZoomInUp{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.frame=CGRectMake((self.frame.origin.x), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0.5, 1);;
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomInUp";
+        return self;
+    };
+}
+-(UIView *(^)(void))ZoomInLeft{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0, 0);;
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomInLeft";
+        return self;
+    };
+}
+-(UIView *(^)(void))ZoomInRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(1, 0);;
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomInRight";
+        return self;
+    };
+}
+-(UIView *(^)(void))ZoomOut{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomOut";
+        return self;
+    };
+}
+-(UIView *(^)(void))ZoomOutDown{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.frame=CGRectMake((self.frame.origin.x), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0.5, 0);;
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomOutDown";
+        return self;
+    };
+}
+-(UIView *(^)(void))ZoomOutUp{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.frame=CGRectMake((self.frame.origin.x), (self.frame.origin.y+self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0.5, 1);;
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomOutUp";
+        return self;
+    };
+}
+-(UIView *(^)(void))ZoomOutLeft{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.frame=CGRectMake((self.frame.origin.x-self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(0, 0);;
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomOutLeft";
+        return self;
+    };
+}
+-(UIView *(^)(void))ZoomOutRight{
+    return ^(void){
+        [self initPBAnimate:BasicAnimation];
+        self.BasicAni.property=[POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+        self.frame=CGRectMake((self.frame.origin.x+self.frame.size.width*0.5), (self.frame.origin.y-self.frame.size.height*0.5), self.frame.size.width, self.frame.size.height);
+        self.layer.anchorPoint=CGPointMake(1, 0);;
+        self.BasicAni.fromValue=[NSValue valueWithCGSize:CGSizeMake(1, 1)];;
+        self.BasicAni.toValue=[NSValue valueWithCGSize:CGSizeMake(0, 0)];
+        self.animateType=@"ZoomOutRight";
+        return self;
+    };
+}
+
 #pragma mark 动画事件
 
 -(UIView *(^)(void))Play{
     
     return ^(void){
-        NSLog(@"判断动画状态%hhd",self.isPlaying);
         if (self.isPlaying == NO) {
-            NSLog(@"判断动画状态1%hhd",self.isPlaying);
             switch (self.animationType) {
                 case SpringAnimation:
                     [self.layer pop_addAnimation:self.SpringAni forKey:self.animateType];
-                    [self.layer pop_addAnimation:self.HelpBasicAni forKey:self.HelpAnimateType];
+                    [self.layer pop_addAnimation:self.HelpSpringAni forKey:self.HelpAnimateType];
                     break;
                 case BasicAnimation:
                     [self.layer pop_addAnimation:self.BasicAni forKey:self.animateType];
@@ -941,7 +1074,7 @@ BOOL isPlaying_tmp;
     
 }
 
-#pragma mark 拓展方法
+#pragma mark 拓展方法，Delegate
 
 -(void)initPBAnimate:(PBAnimationType)animationType{
     self.animationType=animationType;
@@ -984,31 +1117,20 @@ BOOL isPlaying_tmp;
     }
 }
 
-//#pragma mark Delegate
-///**
-// @abstract Called on animation start.
-// @param anim The relevant animation.
-// */
+
 - (void)pop_animationDidStart:(POPAnimation *)anim{
     NSLog(@"pop_animationDidStart deldegate");
     self.isPlaying=YES;
     NSLog(@"动画是否在执行：%hhd",self.isPlaying);
 }
 
-/**
- @abstract Called when value meets or exceeds to value.
- @param anim The relevant animation.
- */
+
 - (void)pop_animationDidReachToValue:(POPAnimation *)anim{
     NSLog(@"动画执行过程中");
     NSLog(@"监听动画状态%@",[self.layer pop_animationForKey:self.animateType]);
 }
 
-/**
- // @abstract Called on animation stop.
- // @param anim The relevant animation.
- // @param finished Flag indicating finished state. Flag is true if the animation reached completion before being removed.
- // */
+
 - (void)pop_animationDidStop:(POPAnimation *)anim finished:(BOOL)finished{
     if (finished) {
         self.isPlaying=NO;
