@@ -16,7 +16,6 @@
 		F64BA1561BCE43A10028E697 /* PBAnimateUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F64BA1551BCE43A10028E697 /* PBAnimateUITests.m */; };
 		F66F43A71BCF3FCE00B1A5DC /* PBAnimateDemoMain.m in Sources */ = {isa = PBXBuildFile; fileRef = F66F43A61BCF3FCE00B1A5DC /* PBAnimateDemoMain.m */; };
 		F66F43B71BCF8A0800B1A5DC /* UIView+PBAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = F66F43B61BCF8A0800B1A5DC /* UIView+PBAnimate.m */; };
-		F6A4311F1BD61FBC00843F31 /* PBAnimateView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A4311E1BD61FBC00843F31 /* PBAnimateView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +57,6 @@
 		F66F43B21BCF840D00B1A5DC /* PBAnimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAnimate.h; sourceTree = "<group>"; };
 		F66F43B51BCF8A0800B1A5DC /* UIView+PBAnimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PBAnimate.h"; sourceTree = "<group>"; };
 		F66F43B61BCF8A0800B1A5DC /* UIView+PBAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PBAnimate.m"; sourceTree = "<group>"; };
-		F6A4311D1BD61FBC00843F31 /* PBAnimateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBAnimateView.h; sourceTree = "<group>"; };
-		F6A4311E1BD61FBC00843F31 /* PBAnimateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBAnimateView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,8 +196,6 @@
 				F66F43B21BCF840D00B1A5DC /* PBAnimate.h */,
 				F66F43B51BCF8A0800B1A5DC /* UIView+PBAnimate.h */,
 				F66F43B61BCF8A0800B1A5DC /* UIView+PBAnimate.m */,
-				F6A4311D1BD61FBC00843F31 /* PBAnimateView.h */,
-				F6A4311E1BD61FBC00843F31 /* PBAnimateView.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -390,7 +385,6 @@
 			files = (
 				F66F43A71BCF3FCE00B1A5DC /* PBAnimateDemoMain.m in Sources */,
 				F64BA1351BCE43A10028E697 /* AppDelegate.m in Sources */,
-				F6A4311F1BD61FBC00843F31 /* PBAnimateView.m in Sources */,
 				F66F43B71BCF8A0800B1A5DC /* UIView+PBAnimate.m in Sources */,
 				F64BA1321BCE43A10028E697 /* main.m in Sources */,
 			);

@@ -23,7 +23,7 @@
 @property(nonatomic)UITableView *DemoTableView;
 @property(nonatomic)UIView *DemoContentView;
 @property(nonatomic)UILabel *DemoLabel;
-@property(nonatomic)PBAnimateView *DemoView;
+@property(nonatomic)UIView *DemoView;
 @end
 
 @implementation PBAnimateDemoMain
@@ -47,7 +47,7 @@
     self.DemoTableView.delegate=self;
     self.DemoTableView.dataSource=self;
     
-    self.DemoView=[[PBAnimateView alloc]init];
+    self.DemoView=[[UIView alloc]init];
     self.DemoView.backgroundColor=[UIColor colorWithRed:117.0/255.0 green:101.0/255.0 blue:239.0/255.0 alpha:1];
 //    self.DemoView.layer.cornerRadius=40;
     self.DemoView.layer.masksToBounds=YES;
