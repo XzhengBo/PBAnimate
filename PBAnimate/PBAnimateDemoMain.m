@@ -300,19 +300,19 @@
         self.DemoView.ZoomInLeft().Duration(1).Play();
     }
     if ([selectValue isEqualToString:@"ZoomOut"]) {
-        self.DemoView.ZoomOut().Duration(1).Play();
+        self.DemoView.ZoomOut().Duration(1).Autoreverses(YES).Play();
     }
     if ([selectValue isEqualToString:@"ZoomOutUp"]) {
-        self.DemoView.ZoomOutUp().Duration(1).Play();
+        self.DemoView.ZoomOutUp().Duration(1).Autoreverses(YES).Play();
     }
     if ([selectValue isEqualToString:@"ZoomOutDown"]) {
-        self.DemoView.ZoomOutDown().Duration(1).Play();
+        self.DemoView.ZoomOutDown().Duration(1).Autoreverses(YES).Play();
     }
     if ([selectValue isEqualToString:@"ZoomOutRight"]) {
-        self.DemoView.ZoomOutRight().Duration(1).Play();
+        self.DemoView.ZoomOutRight().Duration(1).Autoreverses(YES).Play();
     }
     if ([selectValue isEqualToString:@"ZoomOutLeft"]) {
-        self.DemoView.ZoomOutLeft().Duration(1).Play();
+        self.DemoView.ZoomOutLeft().Duration(1).Autoreverses(YES).Play();
     }
     NSLog(@"%@",selectValue);
 
